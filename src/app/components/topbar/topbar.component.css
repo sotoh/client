@@ -1,0 +1,16 @@
+#top-bar{      
+    background-color: skyblue;
+}
+
+/* This code inly applies to one element
+div .ui-tabmenu {      
+    background-color: skyblue;  
+    color: wheat;
+}*/
+
+.vertical-container {
+    margin: 0;
+    height: 200px;
+    background: #efefef;
+    border-radius: 4px;
+}
