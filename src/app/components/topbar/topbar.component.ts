@@ -29,11 +29,11 @@ export class TopbarComponent implements OnInit {
       }
     ];*/
     this.items = [
-      {label: 'Stats', icon: 'fa fa-fw fa-bar-chart'},
-      {label: 'Calendar', icon: 'fa fa-fw fa-calendar'},
-      {label: 'Documentation', icon: 'fa fa-fw fa-book'},
-      {label: 'Support', icon: 'fa fa-fw fa-support'},
-      {label: 'Social', icon: 'fa fa-fw fa-twitter'}
+      {label: 'Estadisticas', icon: 'fa fa-fw fa-bar-chart'},
+      {label: 'Usuarios', icon: 'fa fa-fw fa-calendar'},
+      {label: 'Reportes', icon: 'fa fa-fw fa-book'},
+      {label: 'Auditorias', icon: 'fa fa-fw fa-support'},
+      {label: 'Empresas', icon: 'fa fa-fw fa-support'}
   ];
   }
   items: MenuItem[];

@@ -1,7 +1,6 @@
 <div id="top-bar" class="p-grid p-align-center" style="height:258px;">        
     <div class="p-col-10 p-offset-1" >
-
-        <div class="p-col-12"><!--  [style]="{'width': '100%'}">-->
+        <div class="p-col-12">
             <div class="ui-fluid">
                     <div class="ui-g">
                             <div class="ui-g-12 ui-md-12">
@@ -9,26 +8,21 @@
                                             <p-tabMenu [model]="items" [activeItem]="items[0]" ></p-tabMenu>
                                     </div>
                                     <div class="ui-g-3">
-                                            <span class="ui-float-label">
+                                            <div class="ui-inputgroup">                                                    
+                                                    <input type="text" pInputText placeholder="Buscar">
+                                                    <button pButton type="button" label="Buscar"></button>
+                                                </div>
+                                            <!--<span class="ui-float-label">
                                                     <input id="float-input" type="text" size="30" pInputText >
                                                     <label for="float-input">Buscar</label>
-                                                </span>                                              
+                                                </span>-->
                                     </div>
                                 </div>
                     </div>
             </div>                
-        </div>        
-
-        <!--<div class="ui-g-12 ui-md-4">
-            <div class="ui-inputgroup">
-                <span class="ui-inputgroup-addon"><i class="pi pi-user" style="line-height: 1.25;"></i></span>
-                <input type="text" pInputText placeholder="Username">         
-            </div>
-        </div>-->
-
+        </div>
         <div class="p-col-12">
             <app-menunavigator></app-menunavigator>
-        </div>
-        <input type="text" pInputText />
+        </div>        
     </div>        
 </div>
