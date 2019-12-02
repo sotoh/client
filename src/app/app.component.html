@@ -1,13 +1,28 @@
-<!--Top Bar-->    
-        <app-topbar></app-topbar>
+<!--Top Bar
+        <app-topbar></app-topbar>-->
 <!--End Top Bar-->
 
-<!--Body-->    
-<router-outlet></router-outlet>                    
+<!--Body   
+<router-outlet></router-outlet>
 <!--End Body-->    
 
-<!--Footer-->    
+<!--Footer
 <div class="p-grid footer">
             
-    </div>                  
+    </div>-->
 <!--End Footer-->
+<div class="p-grid sample-layout">
+    <div class="p-col-12 p-md-12">
+        <div class="p-col-12">
+            <app-topbar></app-topbar>
+        </div>
+        <div class="p-col-12">
+            <div class="p-grid  p-justify-center">
+                <router-outlet></router-outlet>
+            </div>     
+        </div>
+    </div>
+    <div class="p-col-12">
+        Footer
+    </div>
+</div>

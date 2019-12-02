@@ -9,6 +9,8 @@ import { ComponentsModule } from './components/components.module';
 import { AdminModule } from './admin/admin.module';
 import { AuditorModule } from './auditor/auditor.module';
 import { EnduserModule } from './enduser/enduser.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtinterceptorService } from './services/jwtinterceptor.service';
 
 @NgModule({
   declarations: [
@@ -24,9 +26,12 @@ import { EnduserModule } from './enduser/enduser.module';
     AppRoutingModule,
     AdminModule,
     AuditorModule,
-    EnduserModule
+    EnduserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtinterceptorService, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

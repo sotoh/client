@@ -1,22 +1,23 @@
-
-
-.ui-g div {
-    background-color: #cce4f7;    
-    color: #333333;
-    border: 1px solid #e0eefa;
-}
-.box,
-.sample-layout > div {
-    text-align: center;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    border-radius: 4px;
-}
-
 .body {
     background-color: rgb(249, 252, 255);
 }
 
 .footer {
     background-color: dimgray;
+}
+
+.sample-layout > div {
+    background-color: #cce4f7;
+/*   text-align: center;*/
+    padding-top: 1em;
+    padding-bottom: 1em;
+    border-radius: 4px;
+}
+
+.sample-layout {
+    margin: 0;
+}
+
+.sample-layout > div {
+    border: 1px solid #ffffff;
 }

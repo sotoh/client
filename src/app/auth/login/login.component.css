@@ -1,32 +1,20 @@
-
-.box,
-.sample-layout > div {
-    background-color: skyblue;
-    text-align: center;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    border-radius: 4px;
+.box {
+    background-color: transparent;
+    text-align: center;        
+    -moz-box-shadow: inset 0 0 10px #777777;
+    -webkit-box-shadow: inset 0 0 10px #777777;
+    box-shadow: inset 0 0 10px #777777;
 }
-
-.box-stretched {
-    height: 100%;
-}
-
-.sample-layout {
-    margin: 0;
-}
-
-.sample-layout > div {
-    border: 1px solid #ffffff;
+.login-content {
+    margin: 10px auto 10px auto; text-align: left;
+    /*padding: 12px 38px;*/
 }
 
 .vertical-container {
-    margin: 0;
-    height: 200px;
-    background: #efefef;
-    border-radius: 4px;
-}
+    /*margin: 0;*/
+    /*height: 500px;*/
+    height: 80%;
+    /*height: 80vh;*/
+    background:white;
 
-.nested-grid .p-col-4 {
-    padding-bottom: 1em;
 }

@@ -1,70 +1,29 @@
-<div class="p-grid p-justify-center">
-    <div class="p-col-4">
-            <div class="box">
-                <div class="ui-g">
-                      <p-card header="Simple Card" [style]="{width: '100%'}">
-                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt
-                            quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-                        </div>
-                       </p-card>                                
-                </div>        
-    </div>
-    </div>
-</div>
-<h3>Horizontal Alignment - Around</h3>
-<div class="p-grid p-justify-around">
-    <div class="p-col-4">
-        <div class="box">4</div>
-    </div>
-    <div class="p-col-1">
-        <div class="box">1</div>
-    </div>
-    <div class="p-col-4">
-        <div class="box">4</div>
-    </div>
-</div>
-
-<h3>Horizontal Alignment - Center</h3>
-<div class="p-grid p-justify-center">
-    <div class="p-col-2">
-        <div class="box">2</div>
-    </div>
-    <div class="p-col-4">
-        <div class="box">4</div>
-    </div>
-    <div class="p-col-2">
-        <div class="box">2</div>
-    </div>
-</div>
-
-<h3>Horizontal Alignment - Even</h3>
-<div class="p-grid p-justify-even">
-    <div class="p-col-4">
-        <div class="box">4</div>
-    </div>
-    <div class="p-col-1">
-        <div class="box">1</div>
-    </div>
-    <div class="p-col-4">
-        <div class="box">4</div>
-    </div>
-</div>
-<h3>Nested</h3>
-<div class="p-grid nested-grid">
-    <div class="p-col-8">
-        <div class="p-grid">
-            <div class="p-col-6">
-                <div class="box">6</div>
+<p-messages [(value)]="msgs" [style]="{width: '360px'}"></p-messages>
+<form [formGroup]="login" (ngSubmit)="onSubmit()" style="text-align: center;" >
+    <p-card header="Bienvenido" subheader="Inicio de Sesion" [style]="{width: '360px'}" styleClass="ui-card-shadow">    
+        <div class="ui-fluid" >
+            <div class="ui-g p-justify-center">                
+                <div class="ui-g-12">                    
+                    <span class="ui-float-label">
+                        <input id="float-input" type="text" size="30" pInputText formControlName="username"> 
+                        <label for="float-input">Usuario</label>
+                    </span>
+                    <p-message severity="error" text="Usuario o Correo Requerido" *ngIf="!login.controls['username'].valid&&submitted"></p-message>
+                </div>
             </div>
-            <div class="p-col-6">
-                <div class="box">6</div>
-            </div>
-            <div class="p-col-12">
-                <div class="box">12</div>
+            <br>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <span class="ui-float-label">
+                        <input id="float-input" type="password" size="30" pInputText formControlName="password"> 
+                        <label for="float-input">Contraseña</label>
+                    </span>
+                    <p-message severity="error" text="Contraseña Requerida" *ngIf="!login.controls['password'].valid&&submitted"></p-message>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="p-col-4">
-        <div class="box box-stretched">4</div>
-    </div>
-</div>
+        <p-footer>
+            <button class="ui-button-rounded" type="submit" pButton label="Iniciar" style="margin-right: .25em"></button>        
+        </p-footer>
+    </p-card>
+</form>

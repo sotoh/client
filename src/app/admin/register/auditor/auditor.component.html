@@ -1,1 +1,128 @@
-<p>auditor works!</p>
+<p-blockUI [target]="pnl" [blocked]="blockedPanel">
+    <i class="pi pi-spin pi-spinner" style="position:absolute;top:45%;left:50%; font-size: 3em"></i>
+</p-blockUI>
+<p-messages [(value)]="msgs" [style]="{width: '360px'}"></p-messages>
+<form [formGroup]="auditor" (ngSubmit)="onSubmit()">
+    <p-fieldset #pnl>
+        <p-header><h3>Registro de Auditores</h3></p-header>
+        <div class="ui-fluid">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-2">
+                            Nombre
+                        </div>
+                        <div class="ui-g-6">
+                            <input pInputText type="text" formControlName="name" />
+                        </div>
+                        <div class="ui-g-4">
+                            <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['name'].valid&&submitted"></p-message>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">                        
+                        <div class="ui-g-2">
+                            Correo
+                        </div>
+                        <div class="ui-g-6" >                            
+                            <input pInputText type="text" formControlName="email" />
+                        </div>
+                         <div class="ui-g-4">
+                            <p-message severity="error" [text]="fControls['email'].errors['required'] ? 'Correo Requerido' : fControls['email'].errors['email'] ? 'El correo no es válido' : ''" 
+                             *ngIf="!fControls['email'].valid&&submitted"></p-message>
+                        </div>
+                    </div> 
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-2">
+                            Apellido
+                        </div>
+                        <div class="ui-g-6" >
+                            <input pInputText type="text" formControlName="lastname" />
+                        </div>
+                        <div class="ui-g-4">
+                            <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['lastname'].valid&&submitted"></p-message>
+                        </div>
+                    </div>                    
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-2">
+                            Usuario
+                        </div>
+                        <div class="ui-g-6">
+                            <input pInputText type="text" formControlName="username" />
+                        </div>
+                        <div class="ui-g-4">
+                            <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['username'].valid&&submitted"></p-message>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-2">
+                            Genero
+                        </div>
+                        <div class="ui-g-6">
+                            <div class="ui-g radiobuttons">
+                                <div class="ui-g-12"><p-radioButton name="group1" value="male" label="Hombre" [(ngModel)]="val" formControlName="gender"></p-radioButton></div>
+                                <div class="ui-g-12"><p-radioButton name="group1" value="female" label="Mujer" [(ngModel)]="val" formControlName="gender"></p-radioButton></div>
+                            </div>
+                        </div>
+                        <div class="ui-g-4">
+                            <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['gender'].valid&&submitted"></p-message>
+                        </div>
+                    </div>                    
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-2">
+                            Password
+                        </div>
+                        <div class="ui-g-6">
+                            <input type="password" pPassword formControlName="password" />
+                        </div>
+                        <div class="ui-g-4">
+                            <p-message severity="error" [text]="fControls['password'].errors['required'] ? 'Contraseña Requerida' : fControls['password'].errors['minlength'] ? 'Debe contener almenos 6 caracteres' : ''" 
+                            *ngIf="!fControls['password'].valid&&submitted"></p-message>
+                        </div>
+                    </div>
+                     <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-2">
+                            Tipo de Auditor
+                        </div>
+                        <div class="ui-g-6">
+                            <p-dropdown [options]="types" [(ngModel)]="selectedType" (onChange)="onChange($event)" formControlName="type"></p-dropdown>
+                        </div>
+                        <div class="ui-g-4">
+                            <p-message severity="error" text="Obligatorio" *ngIf="!fControls['type'].valid&&submitted"></p-message>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-12" *ngIf="external">
+                        <p-fieldset legend="Auditor Externo" [collapsed]="false">                            
+                            <p-footer>                                
+                                <div class="ui-g-12 ui-md-6">
+                                    <div class="ui-g-2">
+                                        Compañia
+                                    </div>
+                                    <div class="ui-g-6">
+                                        <input pInputText type="text" formControlName="company" />
+                                    </div>
+                                    <div class="ui-g-4">
+                                        <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['company'].valid&&submitted"></p-message>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-md-6">
+                                    <div class="ui-g-2">
+                                        Miembro desde:
+                                    </div>
+                                    <div class="ui-g-6">
+                                        <p-calendar [(ngModel)]="dateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2020" dateFormat="dd/mm/yy" formControlName="memberdate"></p-calendar>
+                                    </div>
+                                    <div class="ui-g-4">
+                                        <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['memberdate'].valid&&submitted"></p-message>
+                                    </div>
+                                </div>
+                            </p-footer>                            
+                        </p-fieldset>
+                    </div>
+                    <div class="ui-g-12 ui-md-2 p-md-offset-5">
+                        <button pButton label="Registrar" class="ui-button-raised"></button>
+                    </div>
+                </div>                     
+            </div>
+        </div>            
+    </p-fieldset>        
+</form>
