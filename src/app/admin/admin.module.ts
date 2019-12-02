@@ -11,15 +11,16 @@ import { PasswordModule } from 'primeng/password';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { CreateComponent } from './audits/create/create.component';
 import { CalendarModule } from 'primeng/calendar';
 import { PanelModule } from 'primeng/panel';
 import { MessageModule } from 'primeng/message';
 import { BlockUIModule } from 'primeng/blockui';
 import { EnterpriseComponent } from './register/enterprise/enterprise.component';
+import { EditComponent } from './audits/custom/edit/edit.component';
+import { CreateComponent } from './audits/custom/create/create.component';
 
 @NgModule({
-  declarations: [AuditorComponent, CreateComponent, EnterpriseComponent],
+  declarations: [AuditorComponent, EnterpriseComponent, EditComponent,CreateComponent],
   imports: [
     CommonModule,
     HttpClientModule,
