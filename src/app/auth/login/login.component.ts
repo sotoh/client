@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { first } from 'rxjs/operators';
 import { Message } from 'primeng/components/common/api';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+  subLogin: Subscription;
   login: FormGroup;
   loading = false;
   submitted = false;
@@ -38,6 +40,10 @@ export class LoginComponent implements OnInit {
     //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  ngOnDestroy() {
+    this.subLogin.unsubscribe();
+  }
+
   //getter for forms
   get f() {
     return this.login.controls;
@@ -54,9 +60,10 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.authService.login(this.f.username.value, this.f.password.value)
+    this.subLogin = this.authService.login(this.f.username.value, this.f.password.value)
     .pipe(first())
     .subscribe(data => {
+      console.log(data)
       this.router.navigate([this.returnUrl]);
     },
     error => {      

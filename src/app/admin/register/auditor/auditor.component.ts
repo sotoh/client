@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {SelectItem} from 'primeng/api';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { SelectItem } from 'primeng/api';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Message } from 'primeng/components/common/api';
 import { AuditoroperationsService } from './services/auditoroperations.service';
+import { first, map, tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -10,14 +12,20 @@ import { AuditoroperationsService } from './services/auditoroperations.service';
   templateUrl: './auditor.component.html',
   styleUrls: ['./auditor.component.css']
 })
-export class AuditorComponent implements OnInit {
+export class AuditorComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    this.subResponse.unsubscribe();
+    this.subRespExtra.unsubscribe();
+  }
+  subResponse: Subscription;
+  subRespExtra: Subscription;
   auditor: FormGroup;
-  //loading = false;
   submitted = false;
   external = false;
   blockedPanel: boolean = false;
   msgs: Message[] = [];
   error= '';
+  response = '';
   selectedType: string;
   types: SelectItem[];
   dateValue: Date;
@@ -28,15 +36,15 @@ export class AuditorComponent implements OnInit {
 
   ngOnInit() {
     this.auditor = this.formbuilder.group({
-      username: new FormControl('',Validators.required), //got
-      email: new FormControl('',Validators.compose([Validators.required, Validators.email])), //got
-      password: new FormControl('',Validators.compose([Validators.required, Validators.minLength(6)])), //got
-      name: new FormControl('',Validators.required),//got
-      lastname: new FormControl('',Validators.required), //got
-      gender: new FormControl('',Validators.required),//got
-      type: new FormControl('',Validators.required), //got
-      company: new FormControl(''),//got
-      memberdate: new FormControl('')//got
+      username: new FormControl('',Validators.required), 
+      email: new FormControl('',Validators.compose([Validators.required, Validators.email])), 
+      password: new FormControl('',Validators.compose([Validators.required, Validators.minLength(6)])), 
+      name: new FormControl('',Validators.required),
+      lastname: new FormControl('',Validators.required), 
+      gender: new FormControl('',Validators.required),
+      type: new FormControl('',Validators.required), 
+      company: new FormControl(''),
+      memberdate: new FormControl('')
     });
     this.types = [];
     this.types.push({label:'Selecciona Tipo', value:''});
@@ -52,44 +60,98 @@ export class AuditorComponent implements OnInit {
         this.fControls.memberdate.setValidators(null);
       }
       this.auditor.updateValueAndValidity();
-    })
-  }
-
-  blockPanel() {
-    this.blockedPanel = true;
-    setTimeout(() => {
-        this.blockedPanel = false;
-    }, 3000);
+    });
+    //console.log(this.fControls);
   }
 
   showError() {
     this.msgs = [];
-    this.msgs.push({severity:'error', summary:'Mensaje de Error' , detail:this.error});
+    this.msgs.push({severity:'error', summary:'Mensaje de Error:' , detail:this.error});
+  }
+
+  showSuccess() {
+    this.msgs = [];
+    this.msgs.push({severity:'success', summary:'Completado', detail: this.response});
   }  
 
   onChange(event) {    
     if(event.value=='external') {
-      this.external = true;
+      this.external = true;      
     } else {
       this.external = false;
+      this.fControls['memberdate'].setErrors(null);
+      this.fControls['memberdate'].updateValueAndValidity();
+      this.fControls['company'].setErrors(null);
+      this.fControls['company'].updateValueAndValidity();
     }
   }
 
-  get fControls() { return this.auditor.controls; }
+  clearInputs() {
+    this.submitted = false;
+    this.auditor.reset();
+  }
+
+  get fControls() { 
+    return this.auditor.controls; 
+  }
 
   onSubmit() {
-    this.submitted = true;    
-    /*if(this.loading) {
-      this.loading = false;
-    } else {
-      this.loading = true;
-    }    */
+    this.submitted = true;
     //stop if form is invalid
     if(this.auditor.invalid) {
       return;
     }
-    this.blockedPanel = true;
-    
+    if(this.external) {
+      this.blockedPanel = true;
+      let data = [
+        this.fControls.email.value,
+        this.fControls.username.value,        
+        this.fControls.password.value,
+        this.fControls.name.value,
+        this.fControls.lastname.value,
+        this.fControls.gender.value,
+        this.fControls.type.value,
+        this.fControls.company.value,
+        this.fControls.memberdate.value,
+      ];
+     this.subRespExtra = this.crudService.storeWithExtra(data)
+      .pipe(tap())
+      .subscribe(data => {
+        this.response = data;
+        this.showSuccess();
+        this.clearInputs();
+        this.external = false;
+        this.blockedPanel = false;
+      },
+      error => {
+        this.blockedPanel = false;
+        this.error = error.error;
+        this.showError();
+      });
+    } else {
+      this.blockedPanel = true;
+      let data = [
+        this.fControls.email.value,
+        this.fControls.username.value,        
+        this.fControls.password.value,
+        this.fControls.name.value,
+        this.fControls.lastname.value,
+        this.fControls.gender.value,
+        this.fControls.type.value
+      ];
+     this.subResponse =  this.crudService.store(data)
+      .pipe(tap())
+      .subscribe(data => {
+        this.response = data;
+        this.showSuccess();
+        this.clearInputs();
+        this.blockedPanel = false;
+      },
+      error => {
+        this.blockedPanel = false;
+        this.error = error.error;
+        this.showError();
+      });
+    }
   }
-
 }

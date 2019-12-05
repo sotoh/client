@@ -18,6 +18,17 @@
                         <div class="ui-g-4">
                             <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['name'].valid&&submitted"></p-message>
                         </div>
+                    </div>                    
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-2">
+                            Apellido
+                        </div>
+                        <div class="ui-g-6" >
+                            <input pInputText type="text" formControlName="lastname" />
+                        </div>
+                        <div class="ui-g-4">
+                            <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['lastname'].valid&&submitted"></p-message>
+                        </div>
                     </div>
                     <div class="ui-g-12 ui-md-6">                        
                         <div class="ui-g-2">
@@ -30,18 +41,7 @@
                             <p-message severity="error" [text]="fControls['email'].errors['required'] ? 'Correo Requerido' : fControls['email'].errors['email'] ? 'El correo no es válido' : ''" 
                              *ngIf="!fControls['email'].valid&&submitted"></p-message>
                         </div>
-                    </div> 
-                    <div class="ui-g-12 ui-md-6">
-                        <div class="ui-g-2">
-                            Apellido
-                        </div>
-                        <div class="ui-g-6" >
-                            <input pInputText type="text" formControlName="lastname" />
-                        </div>
-                        <div class="ui-g-4">
-                            <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['lastname'].valid&&submitted"></p-message>
-                        </div>
-                    </div>                    
+                    </div>                     
                     <div class="ui-g-12 ui-md-6">
                         <div class="ui-g-2">
                             Usuario
@@ -101,7 +101,7 @@
                                         <input pInputText type="text" formControlName="company" />
                                     </div>
                                     <div class="ui-g-4">
-                                        <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['company'].valid&&submitted"></p-message>
+                                        <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['company'].valid&&external"></p-message>
                                     </div>
                                 </div>
                                 <div class="ui-g-12 ui-md-6">
@@ -112,7 +112,7 @@
                                         <p-calendar [(ngModel)]="dateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2020" dateFormat="dd/mm/yy" formControlName="memberdate"></p-calendar>
                                     </div>
                                     <div class="ui-g-4">
-                                        <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['memberdate'].valid&&submitted"></p-message>
+                                        <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['memberdate'].valid&&external"></p-message>
                                     </div>
                                 </div>
                             </p-footer>                            
@@ -121,6 +121,9 @@
                     <div class="ui-g-12 ui-md-2 p-md-offset-5">
                         <button pButton label="Registrar" class="ui-button-raised"></button>
                     </div>
+                    <!--<div class="ui-g-12 ui-md-2 p-md-offset-5">
+                        <button pButton type="button" label="Limpiar" (click)="clearInputs()" class="ui-button-raised"></button>
+                    </div>-->
                 </div>                     
             </div>
         </div>            

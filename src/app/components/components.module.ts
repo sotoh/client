@@ -7,12 +7,16 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { MenunavigatorComponent } from './menunavigator/menunavigator.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { FooterComponent } from './footer/footer.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 @NgModule({
   declarations: [
     TopbarComponent,
-    MenunavigatorComponent    
+    MenunavigatorComponent,
+    FooterComponent,
+    NotfoundComponent    
   ],
   imports: [
     CommonModule,    
