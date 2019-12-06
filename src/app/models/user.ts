@@ -11,3 +11,8 @@ export interface User {
     token: string;
     type: string;
   }
+
+  export interface Url {
+    name: string;
+    url: string;
+  }

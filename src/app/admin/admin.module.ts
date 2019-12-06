@@ -25,9 +25,11 @@ import { EnterprisesComponent } from './index/enterprises/enterprises.component'
 import { HomeauditsComponent } from './audits/homeaudits/homeaudits.component';
 import { HometemplateComponent } from './audits/template/hometemplate/hometemplate.component';
 import { InternalauditComponent } from './audits/template/internalaudit/internalaudit.component';
+import { HomeadminComponent } from './homeadmin/homeadmin.component';
+import { IndexComponent } from './index/index.component';
 
 @NgModule({
-  declarations: [AuditorComponent, EnterpriseComponent, EditComponent,CreateComponent, AuditorsComponent, EnterprisesComponent, HomeauditsComponent, HometemplateComponent, InternalauditComponent],
+  declarations: [AuditorComponent, EnterpriseComponent, EditComponent,CreateComponent, AuditorsComponent, EnterprisesComponent, HomeauditsComponent, HometemplateComponent, InternalauditComponent, HomeadminComponent, IndexComponent],
   imports: [
     CommonModule,
     HttpClientModule,

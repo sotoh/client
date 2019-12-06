@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { RoutenameService } from 'src/app/components/services/routename.service';
 
 @Component({
-  selector: 'app-homeauditor',
-  templateUrl: './homeauditor.component.html',
-  styleUrls: ['./homeauditor.component.css']
+  selector: 'app-index',
+  templateUrl: './index.component.html',
+  styleUrls: ['./index.component.css']
 })
-export class HomeauditorComponent implements OnInit {
+export class IndexComponent implements OnInit {
 
   constructor(private titleService: RoutenameService) { }
 
   ngOnInit() {
-    this.titleService.setTitle('Auditor','auditor');
+    this.titleService.setTitle('Indice','indice');
   }
 
 }

@@ -4,20 +4,22 @@
             <div class="ui-fluid">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-md-12">
-                        <div class="ui-g-9">
-                            <p-tabMenu [model]="items" [activeItem]="items[0]" ></p-tabMenu>
+                        <div class="ui-g-12">
+                            <!--<p-tabMenu [model]="items" [activeItem]="items[0]" ></p-tabMenu>-->
+                            <p-menubar [model]="items">                                
+                            </p-menubar>
                         </div>
-                        <div class="ui-g-3">
+                        <!--<div class="ui-g-3">
                             <div class="ui-inputgroup">
                                 <input type="text" pInputText placeholder="Buscar">
                                 <button pButton type="button" label="Buscar"></button>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>                
         </div>
-        <div class="p-col-12">
+        <div class="p-col-12" *ngIf="currentUser">
             <app-menunavigator></app-menunavigator>
         </div>        
     </div>        

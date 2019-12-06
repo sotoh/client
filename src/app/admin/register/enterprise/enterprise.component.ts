@@ -4,6 +4,7 @@ import { Message, SelectItem } from 'primeng/components/common/api';
 import { EnterpriseoperationsService } from './services/enterpriseoperations.service';
 import { Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { RoutenameService } from 'src/app/components/services/routename.service';
 
 @Component({
   selector: 'app-enterprise',
@@ -24,10 +25,12 @@ export class EnterpriseComponent implements OnInit, OnDestroy {
   industry: SelectItem[];
   constructor(
     private formBuilder: FormBuilder,
-    private crudService: EnterpriseoperationsService 
-  ) { }
+    private crudService: EnterpriseoperationsService,
+    private titleService: RoutenameService
+  ) {}
 
   ngOnInit() {
+    this.titleService.setTitle('Empresa','empresa');
     this.enterprise = this.formBuilder.group({
       username: new FormControl('',Validators.required), 
       email: new FormControl('',Validators.compose([Validators.required, Validators.email])), 

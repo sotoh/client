@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RoutenameService } from 'src/app/components/services/routename.service';
 
 @Component({
   selector: 'app-reportuser',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportuserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleService: RoutenameService) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Reportes','reportes');
   }
+
 
 }

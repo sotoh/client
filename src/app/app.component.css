@@ -7,8 +7,8 @@
 }
 
 .sample-layout > div {
-    background-color: #cce4f7;
-/*   text-align: center;*/
+    /*background-color: #cce4f7;*/
+    /*text-align: center; Modifica todo el documento*/
     padding-top: 1em;
     padding-bottom: 1em;
     border-radius: 4px;

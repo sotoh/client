@@ -5,6 +5,7 @@ import { Message } from 'primeng/components/common/api';
 import { AuditoroperationsService } from './services/auditoroperations.service';
 import { first, map, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { RoutenameService } from 'src/app/components/services/routename.service';
 
 
 @Component({
@@ -31,10 +32,12 @@ export class AuditorComponent implements OnInit, OnDestroy {
   dateValue: Date;
   constructor(
     private formbuilder: FormBuilder,
-    private crudService: AuditoroperationsService    
+    private crudService: AuditoroperationsService,
+    private titleService: RoutenameService
     ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Auditor','auditor');
     this.auditor = this.formbuilder.group({
       username: new FormControl('',Validators.required), 
       email: new FormControl('',Validators.compose([Validators.required, Validators.email])), 

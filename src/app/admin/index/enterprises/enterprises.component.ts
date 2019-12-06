@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RoutenameService } from 'src/app/components/services/routename.service';
 
 @Component({
   selector: 'app-enterprises',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./enterprises.component.css']
 })
 export class EnterprisesComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor(private titleService: RoutenameService) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Empresas','empresas');
   }
 
 }

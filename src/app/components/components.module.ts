@@ -9,6 +9,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { FooterComponent } from './footer/footer.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { MenubarModule } from 'primeng/menubar';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     TopbarComponent,
     MenunavigatorComponent,
     FooterComponent,
-    NotfoundComponent    
+    NotfoundComponent,
+    AboutComponent    
   ],
   imports: [
     CommonModule,    
@@ -24,7 +27,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     ButtonModule,
     AutoCompleteModule,
     InputTextModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    MenubarModule
   ],
   exports: [ 
     TopbarComponent,
