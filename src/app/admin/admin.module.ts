@@ -11,6 +11,7 @@ import { PasswordModule } from 'primeng/password';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'primeng/calendar';
 import { PanelModule } from 'primeng/panel';
 import { MessageModule } from 'primeng/message';
@@ -27,11 +28,13 @@ import { HometemplateComponent } from './audits/template/hometemplate/hometempla
 import { InternalauditComponent } from './audits/template/internalaudit/internalaudit.component';
 import { HomeadminComponent } from './homeadmin/homeadmin.component';
 import { IndexComponent } from './index/index.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [AuditorComponent, EnterpriseComponent, EditComponent,CreateComponent, AuditorsComponent, EnterprisesComponent, HomeauditsComponent, HometemplateComponent, InternalauditComponent, HomeadminComponent, IndexComponent],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AdminRoutingModule,
     ReactiveFormsModule,
@@ -48,7 +51,9 @@ import { IndexComponent } from './index/index.component';
     MessageModule,
     MessagesModule,
     InputTextModule,
-    KeyFilterModule
+    KeyFilterModule,
+    TableModule,
+    
   ]
 })
 export class AdminModule { }

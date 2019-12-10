@@ -14,9 +14,16 @@ export class RoutenameService {
     this.currentTitle = this.currentTitleSubject.asObservable();
    }
 
-   /*addTitle(title:string):void {
-    this.currentTitleSubject.
-   }*/
+   removeTitle():void {
+    this.currentTitleSubject.value.pop();
+    this.currentTitleSubject.next(this.currentTitleSubject.value);
+   }
+
+   setonlyTitle(title: string) {
+    //console.log(this.currentTitleSubject.value);
+    this.currentTitleSubject.value.push({label: title});
+    this.currentTitleSubject.next(this.currentTitleSubject.value);
+  }
 
    setTitle(title: string, address: string) {
      //console.log(this.currentTitleSubject.value);

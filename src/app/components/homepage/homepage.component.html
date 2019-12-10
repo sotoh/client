@@ -1,0 +1,10 @@
+<p-card header="Bienvenido al Sistema de Auditorías" subheader="{{text}}" [style]="{width: '360px'}" style="text-align: center;" styleClass="ui-card-shadow">    
+    <div *ngIf="!currentUser; else userResp">
+        Porfavor, inicie sesion para usar el sistema.
+    </div>
+    <ng-template #userResp>
+        Correo: {{currentUser.email}}
+        <br>        
+        Usuario: {{currentUser.username}}
+    </ng-template>
+</p-card>

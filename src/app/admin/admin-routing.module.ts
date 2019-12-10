@@ -17,7 +17,7 @@ import { AdminguardService } from './services/adminguard.service';
 //{path:'**', component: NotfoundComponent}
 //, canActivate: [AdminguardService]
 const routes: Routes = [
-  { path: 'admin', component: HomeadminComponent, 
+  { path: '', component: HomeadminComponent, 
   children: [
     { path: 'auditor',  component: AuditorComponent},
     { path: 'empresa',  component: EnterpriseComponent },

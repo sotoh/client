@@ -11,6 +11,10 @@ import { FooterComponent } from './footer/footer.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { MenubarModule } from 'primeng/menubar';
 import { AboutComponent } from './about/about.component';
+import { ComponentsRoutingModule } from './components-routing.module';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { HomepageComponent } from './homepage/homepage.component';
+import { CardModule } from 'primeng/card';
 
 
 @NgModule({
@@ -19,7 +23,8 @@ import { AboutComponent } from './about/about.component';
     MenunavigatorComponent,
     FooterComponent,
     NotfoundComponent,
-    AboutComponent    
+    AboutComponent,
+    HomepageComponent    
   ],
   imports: [
     CommonModule,    
@@ -28,7 +33,10 @@ import { AboutComponent } from './about/about.component';
     AutoCompleteModule,
     InputTextModule,
     BreadcrumbModule,
-    MenubarModule
+    CardModule,
+    MenubarModule,
+    ComponentsRoutingModule,
+    AngularFontAwesomeModule
   ],
   exports: [ 
     TopbarComponent,

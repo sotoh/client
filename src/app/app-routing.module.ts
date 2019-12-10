@@ -3,6 +3,8 @@ import { RouterModule, Routes }  from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { LoginComponent } from './auth/login/login.component';
+import { AboutComponent } from './components/about/about.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 //import { DETAILS_ROUTES } from './details/details.routes';
 
 //{path:'**', component: NotfoundComponent}
@@ -15,7 +17,7 @@ const appRoutes: Routes =[
     CommonModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     )
   ],
   exports: [

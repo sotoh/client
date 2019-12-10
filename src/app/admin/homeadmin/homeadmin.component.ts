@@ -12,7 +12,7 @@ export class HomeadminComponent implements OnInit {
   constructor(private titleService: RoutenameService) { }
 
   ngOnInit() {
-   this.titleService.setTitle('Admin','admin')
+   this.titleService.setonlyTitle('Admin')
   }
 
 }

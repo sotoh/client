@@ -23,7 +23,9 @@
             </div>
         </div>
         <p-footer>
-            <button class="ui-button-rounded" type="submit" pButton label="Iniciar" style="margin-right: .25em"></button>        
+            <button class="ui-button-rounded" type="submit" pButton label="Iniciar" *ngIf="!loading" style="margin-right: .25em"></button>
+            <br>
+            <i class="pi pi-spin pi-spinner" *ngIf="loading" style="font-size: 3em; margin-right: .25em"></i>
         </p-footer>
     </p-card>
 </form>

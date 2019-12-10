@@ -27,8 +27,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) { 
     //redirect to home if already logged in
     if(this.authService.currentUserValue) {
-      this.router.navigate(['/']);
-    }
+      switch(this.authService.currentUserValue.type) {
+        case 'admin':
+          this.router.navigate(['/admin']); break;
+        case 'auditor': 
+          this.router.navigate(['/auditor']); break;
+        case 'enterprise': 
+          this.router.navigate(['/empresa']);break;
+      }
+    }    
   }
 
   ngOnInit() {
@@ -37,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: new FormControl('',Validators.required)
     });
     //get return url from route parameters or default to '/'
-    //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   ngOnDestroy() {
@@ -64,6 +71,14 @@ export class LoginComponent implements OnInit, OnDestroy {
     .pipe(first())
     .subscribe(data => {
       console.log(data)
+      switch(data.type){
+        case 'admin':
+            this.router.navigate(['/admin']); break;
+          case 'auditor': 
+            this.router.navigate(['/auditor']); break;
+          case 'enterprise': 
+            this.router.navigate(['/empresa']);break;
+      }
       this.router.navigate([this.returnUrl]);
     },
     error => {      
