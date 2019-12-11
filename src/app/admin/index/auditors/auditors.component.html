@@ -1,10 +1,13 @@
-<p-table [columns]="cols" [value]="cars" dataKey="vin">
+<p-messages [(value)]="msgs" [style]="{width: '360px'}"></p-messages>
+<p-table [columns]="cols" [value]="auditors" dataKey="id" [rows]="rows" [lazy]="true"
+(onLazyLoad)="loadData($event)" [paginator]="true" [loading]="loading" [totalRecords]="totalRecords">
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th style="width: 3em"></th>
-            <th *ngFor="let col of columns">
-                {{col.header}}
-            </th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Genero</th>
+            <th>Accion</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
@@ -14,8 +17,11 @@
                     <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
                 </a>
             </td>
-            <td *ngFor="let col of columns">
-                {{rowData[col.field]}}
+            <td>{{rowData.name}}</td>
+            <td>{{rowData.lastname}}</td>
+            <td>{{rowData.gender}}</td>
+            <td>
+                <button pButton type="button" icon="pi pi-times" iconPos="right" label="Eliminar" (click)="deleteAction(rowData.id)" class="ui-button-raised ui-button-danger"></button>
             </td>
         </tr>
     </ng-template>
@@ -23,24 +29,26 @@
         <tr>
             <td [attr.colspan]="columns.length + 1">
                 <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
-                    <div class="ui-g-12 ui-md-3" style="text-align:center">
-                        <img [attr.alt]="rowData.brand" src="assets/showcase/images/demo/car/{{rowData.brand}}.png">
-                    </div>
-                    <div class="ui-g-12 ui-md-9">
+                    <div class="ui-g-12 ui-md-6">
                         <div class="ui-g">
                             <div class="ui-g-12">
-                                <b>Vin:</b> {{rowData.vin}}
+                                <b>Usuario:</b> {{rowData.user.username}}
                             </div>
                             <div class="ui-g-12">
-                                <b>Year:</b> {{rowData.year}}
+                                <b>Correo:</b> {{rowData.user.email}}
                             </div>
                             <div class="ui-g-12">
-                                <b>Brand:</b> {{rowData.brand}}
+                                <b>Tipe de Usuario:</b> {{rowData.user.type | titlecase}}
                             </div>
-                            <div class="ui-g-12">
-                                <b>Color:</b> {{rowData.color}}
-                            </div>
-                        </div>
+                        </div>                        
+                    </div>
+                    <div class="ui-g-12 ui-md-6" *ngIf="rowData.isExternal">
+                        <p-card header="Auditor Externo">
+                            <b>Compañia:</b> {{rowData.external.company | titlecase}}
+                            <br>
+                            <br>
+                            <b>Miembro desde:</b> {{rowData.external.memberdate | date:'dd MMMM y'}}
+                        </p-card>
                     </div>
                 </div>
             </td>

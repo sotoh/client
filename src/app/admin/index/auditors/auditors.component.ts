@@ -2,7 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RoutenameService } from 'src/app/components/services/routename.service';
 import { AuditorindexService } from './service/auditorindex.service';
 import { trigger,state,style,transition,animate } from '@angular/animations';
-import { Auditor } from 'src/app/models/user';
+import { Auditor, AuditorIndex } from 'src/app/models/user';
+import { Message, LazyLoadEvent } from 'primeng/components/common/api';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auditors',
@@ -28,21 +30,75 @@ export class AuditorsComponent implements OnInit , OnDestroy{
     this.titleService.removeTitle();
   }
   auditors: Auditor[];
+  index: AuditorIndex
   cols:any[];
-
+  msgs: Message[] = [];
+  error= '';
+  rows:number
+  response = '';
+  loading = false;
+  totalRecords: number;
   constructor(
     private titleService: RoutenameService,
-    private nodeService: AuditorindexService
+    private indexService: AuditorindexService
     ) { }
 
   ngOnInit() {
+    this.loading = true;
     this.titleService.setTitle('Auditores','auditores');
-    this.cols = [
-      { field: 'vin', header: 'Vin' },
-      { field: 'year', header: 'Year' },
-      { field: 'brand', header: 'Brand' },
-      { field: 'color', header: 'Color' }
-  ];
+    this.indexService.indexPipe(1)
+    .pipe(first())
+    .subscribe(resp => {
+      this.loading = false;
+       this.auditors = resp.data;       
+       this.totalRecords = parseInt(resp.total);       
+       this.rows = resp.perPage;
+       console.log(this.auditors)
+    });
+    this.cols = [{},{},{},{}]//<-- Required for the full content of expandibleRow
+  }
+
+  showError() {
+    this.msgs = [];
+    this.msgs.push({severity:'error', summary:'Mensaje de Error:' , detail:this.error});
+  }
+
+  loadData(event: LazyLoadEvent) {
+    this.loading = true;
+    this.indexService.indexPipe((event.first + 10)/10)
+    .pipe(first())
+    .subscribe(resp => {
+      this.loading = false;
+      this.auditors = resp.data;       
+      this.totalRecords = parseInt(resp.total);
+      this.rows = resp.perPage;
+    },error => {
+      this.loading = false;
+      this.error = 'Algo salio mal al recargar';
+      this.showError();
+    });
+  }
+
+  showSuccess() {
+    this.msgs = [];
+    this.msgs.push({severity:'success', summary:'Completado', detail: this.response});
+  }  
+
+  deleteAction(id: number) {   
+    this.loading= true; 
+    this.indexService.destroy(id)
+    .pipe(first())
+    .subscribe(data => {
+      this.response = data;
+      this.auditors.splice(this.auditors.findIndex(row => row.id === id),1);
+      this.showSuccess();
+      this.loading= false;
+    },error => {
+      console.log(error);
+      this.error = error;
+      this.showError();
+      this.loading= false;
+    })
   }
 
 }

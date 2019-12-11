@@ -1,1 +1,117 @@
-<p>create works!</p>
+<p-blockUI [target]="pnl" [blocked]="blockedPanel">
+    <i class="pi pi-spin pi-spinner" style="position:absolute;top:45%;left:50%; font-size: 3em"></i>
+</p-blockUI>
+<p-messages [(value)]="msgs" [style]="{width: '360px'}"></p-messages>
+<!--<form [formGroup]="audits" (ngSubmit)="onSubmit()">-->
+    <p-fieldset #pnl>
+        <p-header><h3>Registro de Auditorías</h3></p-header>
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <p-card header="Nombre de la Auditoría">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-12">
+                                    <div class="ui-g-2">
+                                        Nombre
+                                    </div>
+                                    <div class="ui-g-6">
+                                        <!--<input pInputText type="text" formControlName="name" />-->
+                                    </div>
+                                    <div class="ui-g-4">
+                                        <!--<p-message severity="error" text="Campo Requerido" *ngIf="!fControls['name'].valid&&submitted"></p-message>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </p-card>
+                    </div>
+                    <div class="ui-g-12">
+                        <p-table [columns]="cols" [value]="questions" selectionMode="single" [(selection)]="selectedQuestion" (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="10">
+                            <ng-template pTemplate="caption">
+                                Preguntas de Auditoría
+                            </ng-template>
+                            <ng-template pTemplate="header" let-columns>
+                                <tr>
+                                    <th style="width: 50%">Pregunta</th>
+                                    <th>Tipo</th>
+                                    <th style="width: 30%">Opciones</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                <tr [pSelectableRow]="rowData">
+                                    <!--<td *ngFor="let col of columns">
+                                        {{rowData[col.field]}}
+                                    </td>-->
+                                    <td>
+                                        {{rowData.question}}
+                                    </td>
+                                    <td>
+                                        {{rowData.type}}
+                                    </td>
+                                    <td>
+                                        {{rowData.type}}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="summary" let-rowData>
+                                <div style="text-align:left; width: 150px;">
+                                    <button type="button" pButton icon="fa fa-plus" (click)="showDialogToAdd()" label="Nueva Pregunta"></button>
+                                </div>
+                            </ng-template>    
+                        </p-table>
+                        <p-dialog header="Creacion de Pregunta" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '600px'}">
+                            <div class="ui-g ui-fluid" *ngIf="question">
+                                <div class="ui-g-12">
+                                    <div class="ui-g-4">
+                                        <label for="question">Pregunta</label>
+                                    </div>
+                                    <div class="ui-g-8">
+                                        <input pInputText id="question" [(ngModel)]="question.question" autofocus />
+                                    </div>
+                                </div>
+                                <div class="ui-g-12">
+                                    <div class="ui-g-4">
+                                        <label for="type">Tipo</label>
+                                    </div>
+                                    <div class="ui-g-8">
+                                        <p-dropdown id="type" appendTo="body" (mouseenter)="op2.show($event)"  [options]="options" [(ngModel)]="question.type" [showClear]="true"></p-dropdown>
+                                        <p-overlayPanel #op2 appendTo="body">
+                                            Default: *Nunca *Rara vez *Algunas veces *Frecuentemente *Siempre
+                                            <br>
+                                            Norma ISO: *Obediente *Oportunidad de Mejora *No Conformidad Menor *No Conformidad Mayor
+                                        </p-overlayPanel>
+                                    </div>
+                                </div>
+                                <!--<div class="ui-g-12">
+                                    <div class="ui-g-4">
+                                        <label for="brand">Brand</label>
+                                    </div>
+                                    <div class="ui-g-8">
+                                        <input pInputText id="brand" [(ngModel)]="car.brand" />
+                                    </div>
+                                </div>
+                                <div class="ui-g-12">
+                                    <div class="ui-g-4">
+                                        <label for="color">Color</label>
+                                    </div>
+                                    <div class="ui-g-8">
+                                        <input pInputText id="color" [(ngModel)]="car.color" />
+                                    </div>
+                                </div>-->
+                                
+                            </div>
+                            <p-footer>
+                                <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                                    <button type="button" pButton icon="fa fa-close" (click)="delete()" label="Eliminar"></button>
+                                    <button type="button" pButton icon="fa fa-check" (click)="save()" label="Agregar"></button>
+                                </div>
+                            </p-footer>
+                        </p-dialog>
+                    </div>
+                    <div class="ui-g-12">
+
+                    </div>     
+            </div>
+        </div>            
+    </p-fieldset>        
+<!--</form>-->
+

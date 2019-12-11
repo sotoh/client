@@ -13,6 +13,7 @@ import { HomeadminComponent } from './homeadmin/homeadmin.component';
 import { NotfoundComponent } from '../components/notfound/notfound.component';
 import { IndexComponent } from './index/index.component';
 import { AdminguardService } from './services/adminguard.service';
+import { AssignComponent } from './index/assign/assign.component';
 
 //{path:'**', component: NotfoundComponent}
 //, canActivate: [AdminguardService]
@@ -21,22 +22,42 @@ const routes: Routes = [
   children: [
     { path: 'auditor',  component: AuditorComponent},
     { path: 'empresa',  component: EnterpriseComponent },
-    { path: 'indice',  component: IndexComponent, 
+    { path: 'usuarios',  component: IndexComponent, 
       children: [
         { path: 'empresas',  component: EnterprisesComponent },
         { path: 'auditores',  component: AuditorsComponent },
+        { path: 'auditorias',  component: AssignComponent }
     ]},
-    { path: 'auditorias',  component: HomeauditsComponent, 
+    { path: '',  component: HomeauditsComponent, 
       children: [
         { path: 'crear',  component:  CreateComponent},
-        { path: 'editar/:id',  component:  EditComponent},
-        { path: 'plantillas',  component: HometemplateComponent,
+        { path: 'auditorias',  component: HometemplateComponent,
           children: [
-            {path:'interna', component:InternalauditComponent}
+            {path:'plantillas/:id', component:InternalauditComponent},
+            {path:'editar/:id',  component:  EditComponent}
         ] }
       ]}
     ], canActivate: [AdminguardService]}
   ];
+  /*const routes: Routes = [
+      { path: 'auditor',  component: AuditorComponent },
+      { path: 'empresa',  component: EnterpriseComponent },
+      { path: 'usuarios',  component: IndexComponent, 
+        children: [
+          { path: 'empresas',  component: EnterprisesComponent },
+          { path: 'auditores',  component: AuditorsComponent },
+          { path: 'auditorias',  component: AssignComponent }
+      ]},
+      { path: '',  component: HomeauditsComponent, 
+        children: [
+          { path: 'crear',  component:  CreateComponent},
+          { path: 'auditorias',  component: HometemplateComponent,
+            children: [
+              {path:'plantillas/:id', component:InternalauditComponent},
+              {path:'editar/:id',  component:  EditComponent}
+          ] }
+        ]}
+    ]*/
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

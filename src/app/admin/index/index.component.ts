@@ -11,7 +11,7 @@ export class IndexComponent implements OnInit {
   constructor(private titleService: RoutenameService) { }
 
   ngOnInit() {
-    this.titleService.setTitle('Indice','indice');
+    this.titleService.setTitle('Usuarios','usuarios');
   }
 
 }

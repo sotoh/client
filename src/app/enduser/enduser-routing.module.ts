@@ -9,7 +9,7 @@ import { EnduserguardService } from './services/enduserguard.service';
 //{path:'**', component: NotfoundComponent} 
 //,canActivate: [EnduserguardService]
 const routes: Routes = [
-  {path:'empresa',component: HomeuserComponent, 
+  {path:'',component: HomeuserComponent, 
 children: [
   {path:'perfil',component: ProfileuserComponent },
   {path:'reportes',component: ReportuserComponent }

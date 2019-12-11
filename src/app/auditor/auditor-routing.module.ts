@@ -9,7 +9,7 @@ import { AuditorguardService } from './services/auditorguard.service';
 //{path:'**', component: NotfoundComponent}
 //, canActivate: [AuditorguardService]
 const routes: Routes = [
-  { path:'auditor', component: HomeauditorComponent,
+  { path:'', component: HomeauditorComponent,
    children: [
     {path:'perfil', component: ProfileauditorComponent },
     {path:'auditorias', component: AuditsauditorComponent }

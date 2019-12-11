@@ -44,8 +44,12 @@ export class TopbarComponent implements OnInit, OnDestroy {
       case 'admin': 
       console.log('newadminitems')
       this.items = [
-        {label: 'Usuarios', icon: 'pi pi-users',url:'indice'},
-        {label: 'Auditorias', icon: 'pi pi-list',url:'auditorias'},
+        {label: 'Usuarios', icon: 'pi pi-users',url:'usuarios'},
+        {label: 'Auditorias', icon: 'pi pi-list', 
+        items: [
+          {label: 'Crear', icon: 'pi pi-fw pi-plus', url:'crear'},
+          {label: 'Ver', icon: 'pi pi-fw pi-table', url:'plantillas'}
+      ]},
         {label: 'Auditores', icon: 'pi pi-id-card',url:'auditor'},
         {label: 'Empresas', icon: 'pi pi-th-large',url:'empresa'}
     ];

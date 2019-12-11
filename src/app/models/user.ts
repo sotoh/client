@@ -17,6 +17,14 @@ export interface User {
     url: string;
   }
 
+  export interface AuditorIndex {
+    total: string;
+    perPage: number;
+    page: number;
+    lastPage: number;
+    data: Auditor[];
+  }
+
   export interface Auditor {
     id: number;
     name:string;
@@ -25,6 +33,51 @@ export interface User {
     gender: string;
     isExternal: boolean;
     external: External;
+    user: User;
+  }
+
+  export interface EnterpriseIndex {
+    total: string;
+    perPage: number;
+    page: number;
+    lastPage: number;
+    data: Enterprise[];
+  }
+
+  export interface Enterprise {
+    id:number;
+    address: string;
+    rfc: string;
+    name: string;
+    industry: string;
+    user: User;
+  }
+
+  export interface Question {
+    id:number;
+   // audit_id: number;
+    question:string;
+    type: string;
+    options:Option[];
+  }
+
+  export interface Option {
+    option:string;
+    value:number;
+  }
+
+
+  export interface QuestionIndex {
+    total: string;
+    perPage: number;
+    page: number;
+    lastPage: number;
+    data: Question[];
+  }
+
+  export interface Audit {
+    isCustom: boolean;
+    name:string;
   }
 
   export interface External {

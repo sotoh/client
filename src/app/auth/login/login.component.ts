@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { first } from 'rxjs/operators';
 import { Message } from 'primeng/components/common/api';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +11,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  subLogin: Subscription;
   login: FormGroup;
   loading = false;
   submitted = false;
@@ -48,7 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subLogin.unsubscribe();
+    
   }
 
   //getter for forms
@@ -67,7 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
     this.loading = true;
-    this.subLogin = this.authService.login(this.f.username.value, this.f.password.value)
+    this.authService.login(this.f.username.value, this.f.password.value)
     .pipe(first())
     .subscribe(data => {
       console.log(data)
