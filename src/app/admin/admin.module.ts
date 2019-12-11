@@ -4,7 +4,7 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AuditorComponent } from './register/auditor/auditor.component';
 import { HttpClientModule } from '@angular/common/http';
-//import { ListboxModule } from 'primeng/listbox';
+import { ListboxModule } from 'primeng/listbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { PasswordModule } from 'primeng/password';
@@ -14,13 +14,13 @@ import { InputTextModule } from 'primeng/inputtext';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'primeng/calendar';
 import { PanelModule } from 'primeng/panel';
+import { PaginatorModule } from 'primeng/paginator';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { BlockUIModule } from 'primeng/blockui';
 import { EnterpriseComponent } from './register/enterprise/enterprise.component';
 import { EditComponent } from './audits/custom/edit/edit.component';
 import { CreateComponent } from './audits/custom/create/create.component';
-//import { KeyFilterModule } from 'primeng/keyfilter';
 import { AuditorsComponent } from './index/auditors/auditors.component';
 import { EnterprisesComponent } from './index/enterprises/enterprises.component';
 import { HomeauditsComponent } from './audits/homeaudits/homeaudits.component';
@@ -34,9 +34,11 @@ import { MenuModule } from 'primeng/menu';
 import { AssignComponent } from './index/assign/assign.component';
 import { DialogModule } from 'primeng/dialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { TypePipe } from './audits/type.pipe';
+import { OptionPipe } from './audits/option.pipe';
 
 @NgModule({
-  declarations: [AuditorComponent, EnterpriseComponent, EditComponent,CreateComponent, AuditorsComponent, EnterprisesComponent, HomeauditsComponent, HometemplateComponent, InternalauditComponent, HomeadminComponent, IndexComponent, AssignComponent],
+  declarations: [AuditorComponent, EnterpriseComponent, EditComponent,CreateComponent, AuditorsComponent, EnterprisesComponent, HomeauditsComponent, HometemplateComponent, InternalauditComponent, HomeadminComponent, IndexComponent, AssignComponent, TypePipe, OptionPipe],
   imports: [
     CommonModule,
     BrowserAnimationsModule,
@@ -59,7 +61,9 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     CardModule,
     MenuModule,
     DialogModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    ListboxModule,
+    PaginatorModule
   ]
 })
 export class AdminModule { }

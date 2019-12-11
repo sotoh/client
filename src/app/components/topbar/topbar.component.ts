@@ -48,8 +48,8 @@ export class TopbarComponent implements OnInit, OnDestroy {
         {label: 'Auditorias', icon: 'pi pi-list', 
         items: [
           {label: 'Crear', icon: 'pi pi-fw pi-plus', url:'crear'},
-          {label: 'Ver', icon: 'pi pi-fw pi-table', url:'plantillas'}
-      ]},
+          {label: 'Ver', icon: 'pi pi-fw pi-table', url:'auditorias'}
+      ]},{separator:true},
         {label: 'Auditores', icon: 'pi pi-id-card',url:'auditor'},
         {label: 'Empresas', icon: 'pi pi-th-large',url:'empresa'}
     ];

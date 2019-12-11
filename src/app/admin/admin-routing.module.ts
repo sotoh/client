@@ -26,7 +26,7 @@ const routes: Routes = [
       children: [
         { path: 'empresas',  component: EnterprisesComponent },
         { path: 'auditores',  component: AuditorsComponent },
-        { path: 'auditorias',  component: AssignComponent }
+        { path: 'asignar',  component: AssignComponent }
     ]},
     { path: '',  component: HomeauditsComponent, 
       children: [

@@ -2,7 +2,7 @@
     <i class="pi pi-spin pi-spinner" style="position:absolute;top:45%;left:50%; font-size: 3em"></i>
 </p-blockUI>
 <p-messages [(value)]="msgs" [style]="{width: '360px'}"></p-messages>
-<!--<form [formGroup]="audits" (ngSubmit)="onSubmit()">-->
+<form [formGroup]="audits" (ngSubmit)="onSubmit()">
     <p-fieldset #pnl>
         <p-header><h3>Registro de Auditorías</h3></p-header>
             <div class="ui-fluid">
@@ -15,10 +15,10 @@
                                         Nombre
                                     </div>
                                     <div class="ui-g-6">
-                                        <!--<input pInputText type="text" formControlName="name" />-->
+                                        <input pInputText type="text" formControlName="name" />
                                     </div>
                                     <div class="ui-g-4">
-                                        <!--<p-message severity="error" text="Campo Requerido" *ngIf="!fControls['name'].valid&&submitted"></p-message>-->
+                                        <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['name'].valid&&submitted"></p-message>
                                     </div>
                                 </div>
                             </div>
@@ -36,19 +36,16 @@
                                     <th style="width: 30%">Opciones</th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <ng-template pTemplate="body" let-rowData>
                                 <tr [pSelectableRow]="rowData">
-                                    <!--<td *ngFor="let col of columns">
-                                        {{rowData[col.field]}}
-                                    </td>-->
                                     <td>
                                         {{rowData.question}}
                                     </td>
                                     <td>
-                                        {{rowData.type}}
+                                        {{rowData.type | type}}
                                     </td>
                                     <td>
-                                        {{rowData.type}}
+                                        {{rowData.options | option}}
                                     </td>
                                 </tr>
                             </ng-template>
@@ -61,11 +58,14 @@
                         <p-dialog header="Creacion de Pregunta" [(visible)]="displayDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade" [modal]="true"  [style]="{width: '600px'}">
                             <div class="ui-g ui-fluid" *ngIf="question">
                                 <div class="ui-g-12">
+                                    <p-message severity="info" text="Recuerde seleccionar el Tipo de pregunta"></p-message>
+                                </div>
+                                <div class="ui-g-12">
                                     <div class="ui-g-4">
                                         <label for="question">Pregunta</label>
                                     </div>
                                     <div class="ui-g-8">
-                                        <input pInputText id="question" [(ngModel)]="question.question" autofocus />
+                                        <input pInputText id="question" [ngModelOptions]="{standalone: true}" [(ngModel)]="question.question" autofocus  />
                                     </div>
                                 </div>
                                 <div class="ui-g-12">
@@ -73,31 +73,27 @@
                                         <label for="type">Tipo</label>
                                     </div>
                                     <div class="ui-g-8">
-                                        <p-dropdown id="type" appendTo="body" (mouseenter)="op2.show($event)"  [options]="options" [(ngModel)]="question.type" [showClear]="true"></p-dropdown>
+                                        <p-dropdown id="type" appendTo="body" [ngModelOptions]="{standalone: true}" (onChange)="onChange($event)" placeholder="Seleccione" [options]="options" [(ngModel)]="question.type"></p-dropdown>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12" *ngIf="remainoptions">
+                                    <div class="ui-g-4">                                        
+                                    </div>
+                                        <div class="ui-g-8 ">
+                                            <p-message severity="info" text="Debe seleccionar las Opciones"></p-message>
+                                        </div>
+                                    <div class="ui-g-4">
+                                        <label for="type">Opciones</label>
+                                    </div>
+                                    <div class="ui-g-8">
+                                        <p-dropdown id="type"  appendTo="body" (onChange)="onOptions($event)" [ngModelOptions]="{standalone: true}" (mouseenter)="op2.show($event)" placeholder="Seleccione" [options]="optionsTwo" [(ngModel)]="question.options"></p-dropdown>
                                         <p-overlayPanel #op2 appendTo="body">
                                             Default: *Nunca *Rara vez *Algunas veces *Frecuentemente *Siempre
                                             <br>
-                                            Norma ISO: *Obediente *Oportunidad de Mejora *No Conformidad Menor *No Conformidad Mayor
+                                            Norma ISO: *Obediente *Oportunidad de Mejora *No-Conformidad Menor *No-Conformidad Mayor
                                         </p-overlayPanel>
                                     </div>
                                 </div>
-                                <!--<div class="ui-g-12">
-                                    <div class="ui-g-4">
-                                        <label for="brand">Brand</label>
-                                    </div>
-                                    <div class="ui-g-8">
-                                        <input pInputText id="brand" [(ngModel)]="car.brand" />
-                                    </div>
-                                </div>
-                                <div class="ui-g-12">
-                                    <div class="ui-g-4">
-                                        <label for="color">Color</label>
-                                    </div>
-                                    <div class="ui-g-8">
-                                        <input pInputText id="color" [(ngModel)]="car.color" />
-                                    </div>
-                                </div>-->
-                                
                             </div>
                             <p-footer>
                                 <div class="ui-dialog-buttonpane ui-helper-clearfix">
@@ -107,11 +103,13 @@
                             </p-footer>
                         </p-dialog>
                     </div>
-                    <div class="ui-g-12">
-
+                    <div class="ui-g-4">
+                        <div style="text-align:left; width: 150px;">
+                            <button pButton type="submit" icon="fa fa-plus" label="Registrar"></button>
+                        </div>
                     </div>     
             </div>
         </div>            
     </p-fieldset>        
-<!--</form>-->
+</form>
 

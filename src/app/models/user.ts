@@ -58,13 +58,22 @@ export interface User {
    // audit_id: number;
     question:string;
     type: string;
-    options:Option[];
+    //options:Option[];
+    options:string;
   }
-
+/*
   export interface Option {
     option:string;
     value:number;
+  }*/
+  export interface AuditIndex {
+    total: string;
+    perPage: number;
+    page: number;
+    lastPage: number;
+    data: Audit[];
   }
+
 
 
   export interface QuestionIndex {
@@ -76,8 +85,10 @@ export interface User {
   }
 
   export interface Audit {
+    id:number;
     isCustom: boolean;
     name:string;
+    questions: Question[]
   }
 
   export interface External {

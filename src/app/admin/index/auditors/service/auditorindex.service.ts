@@ -14,7 +14,7 @@ export class AuditorindexService {
   /*index(page:number) { 
     return this.http.get(`${environment.apiUrl}/admin/auditors/${page}`)
     .toPromise()
-      .then(res => <Auditor[]>res)
+      .then(res => <AuditorIndex[]>res)
       .then(data => { return data; });
   }*/
 

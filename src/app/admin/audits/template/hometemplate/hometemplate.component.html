@@ -1,1 +1,67 @@
-<p>hometemplate works!</p>
+<p-messages [(value)]="msgs" [style]="{width: '360px'}"></p-messages>
+<!--<p-table [value]="audits" dataKey="id" [rows]="rows" [lazy]="true"
+(onLazyLoad)="loadData($event)" [paginator]="true" [loading]="loading" [totalRecords]="totalRecords">
+    <ng-template pTemplate="header" >
+        <tr>
+            <th style="width: 3em"></th>
+            <th>Pregunta</th>
+            <th>Tipo</th>
+            <th>Opciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
+        <tr>
+            <td>
+                <a href="#" [pRowToggler]="rowData">
+                    <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>{{rowData.name}}
+                </a>
+            </td>
+            <td>
+                <button pButton type="button" icon="pi pi-times" iconPos="right" label="Eliminar" (click)="deleteAction(rowData.id)" class="ui-button-raised ui-button-danger"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+        <tr>
+            <td>{{rowData.questions.question}}</td>
+            <td>{{rowData.questions.type}}</td>
+            <td>{{rowData.questions.options}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+<br>-->
+
+<p-table [value]="audits" dataKey="id" dataKey="id" [rows]="rows" [lazy]="true"
+    (onLazyLoad)="loadData($event)" [paginator]="true" [loading]="loading" [totalRecords]="totalRecords">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 3em">#</th>
+            <th>Pregunta</th>
+            <th>Tipo</th>
+            <th>Opciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-expanded="expanded" let-columns="columns">
+        <tr class="ui-widget-header" *ngIf="rowGroupMetadata[rowData.id].index === rowIndex">
+            <td colspan="4">
+                <a href="#" [pRowToggler]="rowData">
+                    <i [ngClass]="expanded ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"></i>
+                    <span>{{rowData.name}}</span>
+                </a>
+            </td>
+             <td>
+                <!--<button pButton type="button" icon="pi pi-times" iconPos="right" label="Modificar" (click)="deleteAction(rowData.id)" class="ui-button-raised ui-button-danger"></button>-->
+                <b *ngIf="rowData.isCustom">Auditoría Personalizada</b>
+                <b *ngIf="!rowData.isCustom">Auditoría Interna Certificada ISO</b>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex">
+        <tr *ngFor="let row of rowData.questions; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{row.question}}</td>
+            <td>{{row.type | type}}</td>
+            <td>{{row.options | option}}</td>
+        </tr>
+    </ng-template>
+</p-table>

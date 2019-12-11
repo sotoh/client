@@ -44,11 +44,4 @@ storeWithExtra(data) {
     })
   );
  }
-
- index() {
-   return this.http.get<any>(`${environment.apiUrl}/admin/auditors`)
-   .pipe(map(auditors => {
-    return auditors;
-   }));
- }
 }
