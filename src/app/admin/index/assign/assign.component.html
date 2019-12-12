@@ -1,37 +1,92 @@
+<p-toast [style]="{marginTop: '80px'}" position="top-center" key="tc"></p-toast>
+<p-blockUI [target]="pnl" [blocked]="blockedPanel">
+        <i class="pi pi-spin pi-spinner" style="position:absolute;top:45%;left:50%; font-size: 3em"></i>
+    </p-blockUI>
 <div class="ui-fluid">
     <div class="ui-g">
         <div class="ui-g-12">
-            <div class="ui-g-12 ui-md-6">
-                <p-listbox [options]="cars" [(ngModel)]="selectedCar" [listStyle]="{'max-height':'250px'}">
-                    <ng-template let-car pTemplate="item">
+            <p-card>
+               Asigne primero un auditor a una empresa, enseguida las auditorías a contestar.
+            </p-card>
+        </div>
+        <div class="ui-g-12">
+            <div class="ui-g-12 ui-md-3" >
+                <div class="ui-g-12 ui-md-12">
+                   <p-orderList [value]="auditors" [listStyle]="{'height':'250px'}" header="Auditores" 
+                    filter="filter" filterBy="name" filterPlaceholder="Filtro por nombre" dragdrop="true" [(selection)]="selectedAuditor" (onSelectionChange)=changeAuditor($event)>
+                        <ng-template let-auditor pTemplate="item">
+                            <div class="ui-helper-clearfix">
+                                <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{auditor.name}} {{auditor.lastname}}</div>
+                            </div>
+                        </ng-template>
+                    </p-orderList>
+                </div>
+                <div class="ui-g-12 ui-md-12">
+                    <p-paginator [rows]="10" [totalRecords]="totalAuditors" (onPageChange)="paginateAuditors($event)"></p-paginator>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-3">
+                <div class="ui-g-12 ui-md-12">
+                     <p-orderList [value]="enterprises" [listStyle]="{'height':'250px'}" header="Empresas" 
+                    filter="filter" filterBy="name" filterPlaceholder="Filtro por nombre" dragdrop="true" [(selection)]="selectedEnterprise" (onSelectionChange)=changeEnterprise($event)>
+                        <ng-template let-enterprise pTemplate="item">
+                            <div class="ui-helper-clearfix">
+                                <div style="font-size:14px;float:left;">{{enterprise.name}}</div>
+                            </div>
+                        </ng-template>
+                    </p-orderList>
+                </div>
+                <div class="ui-g-12 ui-md-12">
+                    <p-paginator [rows]="enterpriseRows" [totalRecords]="totalEnterprises" (onPageChange)="paginateEnterprises($event)"></p-paginator>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-6" >
+                <p-table [value]="auditorEnterprises" scrollHeight="200px" [scrollable]="true">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Fecha</th>
+                            <th></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-enterprise>
+                            <tr>
+                                <td>{{enterprise.name}}</td>
+                                <td>{{enterprise.pivot.assign | date:'dd MMMM y'}}</td>
+                                <td><button pButton type="button" label="Seleccionar para Auditoría" (click)="selection(enterprise.id)" class="ui-button-raised ui-button-secondary"></button></td>
+                            </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>        
+        <div class="ui-g-12">
+            <hr>
+            <p-panel #pnl> 
+                <p-header>
+                    <div class="ui-g-3">
+                            <span class="ui-panel-title" style="font-size:14px;display:inline-block;margin-top:2px">Auditorias</span>
+                    </div>
+                    <div class="ui-g-6 ">
+                        <div class="ui-g-3">
+                            <span class="ui-panel-title" style="font-size:12px;display:inline-block;margin-top:2px">Fecha de Aplicacion</span>
+                        </div>
+                        <div class="ui-g-6">
+                            <p-calendar [(ngModel)]="dateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2020" dateFormat="dd/mm/yy" ></p-calendar>
+                        </div>                        
+                    </div>
+                    <div class="ui-g-3">
+                        <button pButton (cornerStyleClass)="top" type="button" label="Asignar Auditoría" [disabled]="blocked" (click)="submitAudits()" icon="pi pi-check-circle"></button>                        
+                    </div>
+                </p-header>
+                <p-pickList  [source]="audits" [target]="targetAudits" [disabled]="blocked" sourceHeader="Auditorias Disponibles" targetHeader="Auditorias Seleccionadas" [responsive]="true" filterBy="name" 
+                    sourceFilterPlaceholder="Busqueda por Auditoría" targetFilterPlaceholder="Busqueda por Auditoría" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+                    <ng-template  let-audit pTemplate="item">
                         <div class="ui-helper-clearfix">
-                            <img src="assets/showcase/images/demo/car/{{car.label}}.png" style="display:inline-block;margin:5px 0 0 5px" width="48">
-                            <span style="float:right;margin:20px 10px 0 0">{{car.value}}</span>
+                            <div style="font-size:14px;float:right;margin:15px 5px 0 0">{{audit.name}}</div>
                         </div>
                     </ng-template>
-                    <p-footer>
-                        Selected: {{selectedCar||'none'}}
-                    </p-footer>
-                </p-listbox>
-            </div>                    
-            <div class="ui-g-12 ui-md-6">
-                <p-listbox [options]="cars" [(ngModel)]="selectedCar" [listStyle]="{'max-height':'250px'}">
-                    <ng-template let-car pTemplate="item">
-                        <div class="ui-helper-clearfix">
-                            <img src="assets/showcase/images/demo/car/{{car.label}}.png" style="display:inline-block;margin:5px 0 0 5px" width="48">
-                            <span style="float:right;margin:20px 10px 0 0">{{car.value}}</span>
-                        </div>
-                    </ng-template>
-                    <p-footer>
-                        Selected: {{selectedCar||'none'}}
-                    </p-footer>
-                </p-listbox>
-            </div>
-            <div class="ui-g-12 ui-md-4">
-                
-            </div>
-            <div class="ui-g-12 ui-md-12">                
-            </div>
-        </div>                     
+                </p-pickList>
+            </p-panel>
+        </div>                    
     </div>
 </div>

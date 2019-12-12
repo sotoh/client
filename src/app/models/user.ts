@@ -51,6 +51,12 @@ export interface User {
     name: string;
     industry: string;
     user: User;
+    pivot?: Pivot;
+  }
+
+  export interface Pivot {
+    assign: Date;
+    status?:string;
   }
 
   export interface Question {

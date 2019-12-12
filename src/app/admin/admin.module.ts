@@ -4,10 +4,10 @@ import { FieldsetModule } from 'primeng/fieldset';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AuditorComponent } from './register/auditor/auditor.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ListboxModule } from 'primeng/listbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { PasswordModule } from 'primeng/password';
+import { ToastModule } from 'primeng/toast';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -18,6 +18,8 @@ import { PaginatorModule } from 'primeng/paginator';
 import { MessageModule } from 'primeng/message';
 import { MessagesModule } from 'primeng/messages';
 import { BlockUIModule } from 'primeng/blockui';
+import { OrderListModule } from 'primeng/orderlist';
+import { PickListModule } from 'primeng/picklist';
 import { EnterpriseComponent } from './register/enterprise/enterprise.component';
 import { EditComponent } from './audits/custom/edit/edit.component';
 import { CreateComponent } from './audits/custom/create/create.component';
@@ -36,6 +38,7 @@ import { DialogModule } from 'primeng/dialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TypePipe } from './audits/type.pipe';
 import { OptionPipe } from './audits/option.pipe';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 @NgModule({
   declarations: [AuditorComponent, EnterpriseComponent, EditComponent,CreateComponent, AuditorsComponent, EnterprisesComponent, HomeauditsComponent, HometemplateComponent, InternalauditComponent, HomeadminComponent, IndexComponent, AssignComponent, TypePipe, OptionPipe],
@@ -54,16 +57,20 @@ import { OptionPipe } from './audits/option.pipe';
     CalendarModule,
     PanelModule,
     BlockUIModule,
+    ToastModule,
     MessageModule,
     MessagesModule,
+    ToastModule,
     InputTextModule,
     TableModule,
     CardModule,
     MenuModule,
     DialogModule,
     OverlayPanelModule,
-    ListboxModule,
-    PaginatorModule
-  ]
+    PaginatorModule,
+    OrderListModule,
+    PickListModule,
+    SplitButtonModule    
+  ],
 })
 export class AdminModule { }
