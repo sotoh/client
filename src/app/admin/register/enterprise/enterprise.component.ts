@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Message, SelectItem } from 'primeng/components/common/api';
 import { EnterpriseoperationsService } from './services/enterpriseoperations.service';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, first } from 'rxjs/operators';
 import { RoutenameService } from 'src/app/components/services/routename.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { RoutenameService } from 'src/app/components/services/routename.service'
 })
 export class EnterpriseComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
-    this.subResponse.unsubscribe();
+    //this.subResponse.unsubscribe();
   }
   subResponse: Subscription;
   enterprise: FormGroup;
@@ -36,8 +36,7 @@ export class EnterpriseComponent implements OnInit, OnDestroy {
       email: new FormControl('',Validators.compose([Validators.required, Validators.email])), 
       password: new FormControl('',Validators.compose([Validators.required, Validators.minLength(6)])), 
       rfc: new FormControl('',Validators.required), 
-      address: new FormControl('',Validators.required), 
-      phonenumber: new FormControl('',Validators.required), 
+      address: new FormControl('',Validators.required),
       name: new FormControl('',Validators.required),
       industry: new FormControl('',Validators.required)   
     });
@@ -76,6 +75,8 @@ export class EnterpriseComponent implements OnInit, OnDestroy {
     this.submitted = true;
     //stop if form is invalid
     if(this.enterprise.invalid) {
+      console.log('se detuvo');
+      console.log(this.enterprise);
       return;
     }
     this.blockedPanel = true;
@@ -89,7 +90,7 @@ export class EnterpriseComponent implements OnInit, OnDestroy {
       this.fControls.industry.value,
     ];
     this.subResponse = this.crudService.store(data)
-    .pipe(tap()).subscribe(
+    .pipe(first()).subscribe(
       data => {
       this.response = data;
       this.showSuccess();

@@ -7,7 +7,7 @@
         <p-header><h3>Registro de Empresas</h3></p-header>
         <div class="ui-fluid">
             <div class="ui-g">
-                <div class="ui-g-12">
+                <div class="ui-g-12">                    
                     <div class="ui-g-12 ui-md-6">
                         <div class="ui-g-2">
                             RFC
@@ -19,6 +19,18 @@
                             <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['rfc'].valid&&submitted"></p-message>
                         </div>
                     </div>
+                    <div class="ui-g-12 ui-md-6">                        
+                        <div class="ui-g-2">
+                            Correo
+                        </div>
+                        <div class="ui-g-6" >                            
+                            <input pInputText type="text" formControlName="email" />
+                        </div>
+                         <div class="ui-g-4">
+                            <p-message severity="error" [text]="fControls['email'].errors['required'] ? 'Correo Requerido' : fControls['email'].errors['email'] ? 'El correo no es válido' : ''" 
+                             *ngIf="!fControls['email'].valid&&submitted"></p-message>
+                        </div>
+                    </div>                     
                     <div class="ui-g-12 ui-md-6">
                         <div class="ui-g-2">
                             Nombre
@@ -29,6 +41,17 @@
                         <div class="ui-g-4">
                             <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['name'].valid&&submitted"></p-message>
                         </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-2">
+                            Usuario
+                        </div>
+                        <div class="ui-g-6">
+                            <input pInputText type="text" formControlName="username" />
+                        </div>
+                        <div class="ui-g-4">
+                            <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['username'].valid&&submitted"></p-message>
+                        </div>
                     </div>                    
                     <div class="ui-g-12 ui-md-6">
                         <div class="ui-g-2">
@@ -38,7 +61,19 @@
                             <input pInputText type="text" formControlName="address" />
                         </div>
                         <div class="ui-g-4">
-                            <p-message severity="error" text="Campo Requerido" *ngIf="!fControls['address'].valid&&submitted"></p-message>
+                            <p-message severity="error" text="Requerido" *ngIf="!fControls['address'].valid&&submitted"></p-message>
+                        </div>
+                    </div>
+                    <div class="ui-g-12 ui-md-6">
+                        <div class="ui-g-2">
+                            Password
+                        </div>
+                        <div class="ui-g-6">
+                            <input type="password" pPassword formControlName="password" />
+                        </div>
+                        <div class="ui-g-4">
+                            <p-message severity="error" [text]="fControls['password'].errors['required'] ? 'Contraseña Requerida' : fControls['password'].errors['minlength'] ? 'Debe contener almenos 6 caracteres' : ''" 
+                            *ngIf="!fControls['password'].valid&&submitted"></p-message>
                         </div>
                     </div>
                      <div class="ui-g-12 ui-md-6">
@@ -51,7 +86,7 @@
                         <div class="ui-g-2">
                             <p-message severity="error" *ngIf="!fControls['industry'].valid&&submitted"></p-message>
                         </div>
-                    </div>                    
+                    </div>
                     <div class="ui-g-12 ui-md-2 p-md-offset-5">
                         <button pButton label="Registrar" class="ui-button-raised"></button>
                     </div>

@@ -9,7 +9,7 @@ export class EnduserguardService  implements CanActivate {
   canActivate(route: import("@angular/router").ActivatedRouteSnapshot, state: import("@angular/router").RouterStateSnapshot) {
     const currentUser = this.authenticationService.currentUserValue;
     if(currentUser) {
-    if(currentUser.type==='user') {
+    if(currentUser.type==='enterprise') {
       //if user logged in so return true
       return true;
     }
