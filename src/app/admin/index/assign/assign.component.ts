@@ -3,7 +3,7 @@ import { AssignindexService } from './assignindex.service';
 import { Auditor, Audit, Enterprise, AuditIndex, AuditorIndex, EnterpriseIndex } from 'src/app/models/user';
 import { RoutenameService } from 'src/app/components/services/routename.service';
 import { first } from 'rxjs/operators';
-import {MessageService} from 'primeng/api';
+import {MessageService, Message} from 'primeng/api';
 
 @Component({
   selector: 'app-assign',
@@ -50,9 +50,11 @@ export class AssignComponent implements OnInit
   error= '';
   response = '';
   warning = '';
+  info = '';
   dateValue: Date;
   blocked = true;
   blockedPanel = false;
+  msgs: Message[] = [];
 
   ngOnInit() {
     this.targetAudits = [];
@@ -77,6 +79,11 @@ export class AssignComponent implements OnInit
 
   showWarn() {
     this.messageService.add({key: 'tc', severity:'warn', summary: 'Advertencia', detail:this.warning});
+  }
+
+  showInfo() {
+    this.msgs = [];
+    this.msgs.push({severity:'info', summary:'Informacion: ', detail:this.info });
   }
 
   showError() {
@@ -125,6 +132,7 @@ export class AssignComponent implements OnInit
     .pipe(first())
     .subscribe(data => {
       this.auditorEnterprises = data;      
+      if(this.auditorEnterprises.length == 0) {this.info = 'El Auditor no tiene empresa asignada'; this.showInfo();}
     });
   }
 
@@ -133,6 +141,7 @@ export class AssignComponent implements OnInit
     .pipe(first())
     .subscribe(data => {
       this.auditorEnterprises = data;
+      if(this.auditorEnterprises.length == 0) {this.info = 'El Auditor no tiene empresa asignada'; this.showInfo();}
     });
   }
 
@@ -148,6 +157,7 @@ export class AssignComponent implements OnInit
   }
 
   submitAudits() {
+    this.blockedPanel = true;
     if(this.targetAudits) {
       if(this.targetAudits.length >= 1) {
         if(this.dateValue) {           
@@ -156,9 +166,13 @@ export class AssignComponent implements OnInit
           this.indexAssign.assignAudits(this.targetAudits,this.enterpriseIdSelected,formatted_date)
           .pipe(first())
           .subscribe(resp => {
+            this.blockedPanel = false;
             this.response = resp;
             this.showSuccess();
+            this.blocked = true
           },error => {
+            this.blockedPanel = false;
+            this.blocked = true;
             this.warning = error.error;
             this.showWarn();
           });

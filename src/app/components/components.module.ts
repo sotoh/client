@@ -40,7 +40,8 @@ import { CardModule } from 'primeng/card';
   ],
   exports: [ 
     TopbarComponent,
-    MenunavigatorComponent 
+    MenunavigatorComponent ,
+    HomepageComponent
   ]
 })
 export class ComponentsModule { }

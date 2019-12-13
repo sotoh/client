@@ -7,7 +7,7 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Genero</th>
-            <th>Accion</th>
+            <!--<th>Accion</th>-->
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-columns="columns">
@@ -20,9 +20,9 @@
             <td>{{rowData.name}}</td>
             <td>{{rowData.lastname}}</td>
             <td>{{rowData.gender}}</td>
-            <td>
+            <!--<td>
                 <button pButton type="button" icon="pi pi-times" iconPos="right" label="Eliminar" (click)="deleteAction(rowData.id)" class="ui-button-raised ui-button-danger"></button>
-            </td>
+            </td>-->
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">

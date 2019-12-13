@@ -55,7 +55,7 @@ export class AuditorsComponent implements OnInit , OnDestroy{
        this.rows = resp.perPage;
        console.log(this.auditors)
     });
-    this.cols = [{},{},{},{}]//<-- Required for the full content of expandibleRow
+    this.cols = [{},{},{}]//<-- Required for the full content of expandibleRow
   }
 
   showError() {

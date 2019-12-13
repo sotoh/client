@@ -10,10 +10,12 @@ export class AuditorguardService implements CanActivate {
     const currentUser = this.authenticationService.currentUserValue;
     if(currentUser) {
     if(currentUser.type=='auditor') {
+        console.log('entro')
       //if user logged in so return true
       return true;
     } else {
-      this.router.navigate(['/'], {queryParams: {returnUrl: state.url}});
+      console.log('no entro')
+      this.router.navigate(['/auditor'], {queryParams: {returnUrl: state.url}});
       return false;
     }  
   }

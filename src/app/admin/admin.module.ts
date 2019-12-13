@@ -11,7 +11,6 @@ import { ToastModule } from 'primeng/toast';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'primeng/calendar';
 import { PanelModule } from 'primeng/panel';
 import { PaginatorModule } from 'primeng/paginator';
@@ -44,7 +43,6 @@ import { SplitButtonModule } from 'primeng/splitbutton';
   declarations: [AuditorComponent, EnterpriseComponent, EditComponent,CreateComponent, AuditorsComponent, EnterprisesComponent, HomeauditsComponent, HometemplateComponent, InternalauditComponent, HomeadminComponent, IndexComponent, AssignComponent, TypePipe, OptionPipe],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     HttpClientModule,
     AdminRoutingModule,
     ReactiveFormsModule,

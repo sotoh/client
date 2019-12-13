@@ -15,8 +15,8 @@ import { RoutenameService } from 'src/app/components/services/routename.service'
 })
 export class AuditorComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
-    this.subResponse.unsubscribe();
-    this.subRespExtra.unsubscribe();
+    //this.subResponse.unsubscribe();
+    //this.subRespExtra.unsubscribe();
   }
   subResponse: Subscription;
   subRespExtra: Subscription;
@@ -118,7 +118,7 @@ export class AuditorComponent implements OnInit, OnDestroy {
         this.fControls.memberdate.value,
       ];
      this.subRespExtra = this.crudService.storeWithExtra(data)
-      .pipe(tap())
+      .pipe(first())
       .subscribe(data => {
         this.response = data;
         this.showSuccess();
@@ -143,7 +143,7 @@ export class AuditorComponent implements OnInit, OnDestroy {
         this.fControls.type.value
       ];
      this.subResponse =  this.crudService.store(data)
-      .pipe(tap())
+      .pipe(first())
       .subscribe(data => {
         this.response = data;
         this.showSuccess();

@@ -3,6 +3,7 @@ import {MenuItem} from 'primeng/api';
 import { AuthenticationService } from 'src/app/auth/services/authentication.service';
 import { User } from 'src/app/models/user';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-topbar',
   templateUrl: './topbar.component.html',
@@ -15,7 +16,7 @@ export class TopbarComponent implements OnInit, OnDestroy {
   items: MenuItem[];
   currentUser: User;
   subUser: Subscription;
-  constructor(private authService: AuthenticationService) {
+  constructor(private authService: AuthenticationService, private router: Router ) {
 
    }
 
@@ -41,29 +42,26 @@ export class TopbarComponent implements OnInit, OnDestroy {
   setNewItems(data:User) {    
     switch(data.type)
     {
-      case 'admin': 
-      console.log('newadminitems')
+      case 'admin':
       this.items = [
-        {label: 'Usuarios', icon: 'pi pi-users',url:'usuarios'},
+        {label: 'Usuarios', icon: 'pi pi-users',url:'admin/usuarios'},
         {label: 'Auditorias', icon: 'pi pi-list', 
         items: [
-          {label: 'Crear', icon: 'pi pi-fw pi-plus', url:'crear'},
-          {label: 'Ver', icon: 'pi pi-fw pi-table', url:'auditorias'}
+          {label: 'Crear', icon: 'pi pi-fw pi-plus', url:'admin/crear'},
+          {label: 'Ver', icon: 'pi pi-fw pi-table', url:'admin/auditorias'}
       ]},{separator:true},
-        {label: 'Auditores', icon: 'pi pi-id-card',url:'auditor'},
-        {label: 'Empresas', icon: 'pi pi-th-large',url:'empresa'}
+        {label: 'Auditores', icon: 'pi pi-id-card',url:'admin/auditor'},
+        {label: 'Empresas', icon: 'pi pi-th-large',url:'admin/empresa'}
     ];
       break;
       case 'enterprise': 
       this.items = [        
-        {label: 'Estadisticas', icon: 'pi pi-chart-line'},        
-        {label: 'Reportes', icon: 'pi pi-briefcase'},
-        {label: 'Perfil', icon: 'pi pi-user'}      
+        {label: 'Estadisticas', icon: 'pi pi-chart-line',url:'usuario/perfil'},        
+        {label: 'Reportes', icon: 'pi pi-briefcase',url:'usuario/reportes'}
     ]; break;
       case 'auditor':
-          this.items = [
-            {label: 'Perfil', icon: 'pi pi-user'},
-            {label: 'Auditorias', icon: 'pi pi-list'}
+          this.items = [            
+            {label: 'Auditorias', icon: 'pi pi-list', url:'auditor/auditorias'}
         ]; break;
       }
   }
@@ -79,6 +77,7 @@ export class TopbarComponent implements OnInit, OnDestroy {
     //this.items = []
     //this.items.push( {label: 'Inicio', icon: 'fa fa-fw fa-bar-chart'},)
     this.authService.logout();
+    this.router.navigate(['/']);
     //this.setLogoutItems();
   }
 }

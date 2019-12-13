@@ -9,11 +9,12 @@ import { AuditorguardService } from './services/auditorguard.service';
 //{path:'**', component: NotfoundComponent}
 //, canActivate: [AuditorguardService]
 const routes: Routes = [
-  { path:'', component: HomeauditorComponent,
+  { path: 'auditor', component: HomeauditorComponent ,
    children: [
-    {path:'perfil', component: ProfileauditorComponent },
+    {path: '',  loadChildren: () => import('../components/components.module').then(m => m.ComponentsModule)}, 
+    {path: 'perfil', component: ProfileauditorComponent},
     {path:'auditorias', component: AuditsauditorComponent }
-  ], canActivate: [AuditorguardService]} 
+  ], canActivate: [AuditorguardService]} ,    
   ];
 
 @NgModule({

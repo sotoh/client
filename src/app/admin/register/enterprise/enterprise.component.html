@@ -42,14 +42,14 @@
                         </div>
                     </div>
                      <div class="ui-g-12 ui-md-6">
-                        <div class="ui-g-2">
+                        <div class="ui-g-4">
                             Giro Empresarial
                         </div>
                         <div class="ui-g-6">
-                            <p-dropdown [options]="industry" [(ngModel)]="selectedType" (onChange)="onChange($event)" formControlName="industry"></p-dropdown>
+                            <p-dropdown [options]="industry" [(ngModel)]="selectedType" formControlName="industry"></p-dropdown>
                         </div>
-                        <div class="ui-g-4">
-                            <p-message severity="error" text="Obligatorio" *ngIf="!fControls['industry'].valid&&submitted"></p-message>
+                        <div class="ui-g-2">
+                            <p-message severity="error" *ngIf="!fControls['industry'].valid&&submitted"></p-message>
                         </div>
                     </div>                    
                     <div class="ui-g-12 ui-md-2 p-md-offset-5">

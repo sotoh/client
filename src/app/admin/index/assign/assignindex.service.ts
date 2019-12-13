@@ -51,6 +51,7 @@ export class AssignindexService {
 
   assignAudits(audits:Audit[], enterprise:number,dateAssign:string) {
     let newArray = audits.map(({isCustom,name,questions, ...audits}) => audits)
+    console.log(`${newArray}, ${enterprise}, ${dateAssign}`)
     return this.http.patch(`${environment.apiUrl}/admin/enterprises/audits/assign/${enterprise}`,{audits: newArray, date: dateAssign},{ responseType: 'text'})
     .pipe(user => {
      return user;

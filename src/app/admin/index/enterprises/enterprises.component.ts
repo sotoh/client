@@ -55,7 +55,7 @@ export class EnterprisesComponent implements OnInit, OnDestroy {
        this.rows = resp.perPage;
        console.log(this.enterprises)
     });
-    this.cols = [{},{},{},{}]//<-- Required for the full content of expandibleRow
+    this.cols = [{},{},{}]//<-- Required for the full content of expandibleRow
   }
 
   showError() {

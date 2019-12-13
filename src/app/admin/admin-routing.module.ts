@@ -18,8 +18,9 @@ import { AssignComponent } from './index/assign/assign.component';
 //{path:'**', component: NotfoundComponent}
 //, canActivate: [AdminguardService]
 const routes: Routes = [
-  { path: '', component: HomeadminComponent, 
+  { path: 'admin', component: HomeadminComponent, canActivate: [AdminguardService],
   children: [
+    {path: '',  loadChildren: () => import('../components/components.module').then(m => m.ComponentsModule)}, 
     { path: 'auditor',  component: AuditorComponent},
     { path: 'empresa',  component: EnterpriseComponent },
     { path: 'usuarios',  component: IndexComponent, 
@@ -28,7 +29,7 @@ const routes: Routes = [
         { path: 'auditores',  component: AuditorsComponent },
         { path: 'asignar',  component: AssignComponent }
     ]},
-    { path: '',  component: HomeauditsComponent, 
+    { path: 'auditorias',  component: HomeauditsComponent, 
       children: [
         { path: 'crear',  component:  CreateComponent},
         { path: 'auditorias',  component: HometemplateComponent,
@@ -37,27 +38,8 @@ const routes: Routes = [
             {path:'editar/:id',  component:  EditComponent}
         ] }
       ]}
-    ], canActivate: [AdminguardService]}
+    ]}
   ];
-  /*const routes: Routes = [
-      { path: 'auditor',  component: AuditorComponent },
-      { path: 'empresa',  component: EnterpriseComponent },
-      { path: 'usuarios',  component: IndexComponent, 
-        children: [
-          { path: 'empresas',  component: EnterprisesComponent },
-          { path: 'auditores',  component: AuditorsComponent },
-          { path: 'auditorias',  component: AssignComponent }
-      ]},
-      { path: '',  component: HomeauditsComponent, 
-        children: [
-          { path: 'crear',  component:  CreateComponent},
-          { path: 'auditorias',  component: HometemplateComponent,
-            children: [
-              {path:'plantillas/:id', component:InternalauditComponent},
-              {path:'editar/:id',  component:  EditComponent}
-          ] }
-        ]}
-    ]*/
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

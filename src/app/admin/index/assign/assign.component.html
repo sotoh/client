@@ -6,7 +6,7 @@
     <div class="ui-g">
         <div class="ui-g-12">
             <p-card>
-               Asigne primero un auditor a una empresa, enseguida las auditorías a contestar.
+              Seleccione primero un auditor para ver las empresas asignadas, enseguida seleccione una empresa para asignarlo.
             </p-card>
         </div>
         <div class="ui-g-12">
@@ -22,7 +22,7 @@
                     </p-orderList>
                 </div>
                 <div class="ui-g-12 ui-md-12">
-                    <p-paginator [rows]="10" [totalRecords]="totalAuditors" (onPageChange)="paginateAuditors($event)"></p-paginator>
+                    <p-paginator [rows]="auditorRows" [totalRecords]="totalAuditors" (onPageChange)="paginateAuditors($event)"></p-paginator>
                 </div>
             </div>
             <div class="ui-g-12 ui-md-3">
@@ -41,6 +41,7 @@
                 </div>
             </div>
             <div class="ui-g-12 ui-md-6" >
+                <p-messages [(value)]="msgs"></p-messages>
                 <p-table [value]="auditorEnterprises" scrollHeight="200px" [scrollable]="true">
                     <ng-template pTemplate="header">
                         <tr>
@@ -71,7 +72,7 @@
                             <span class="ui-panel-title" style="font-size:12px;display:inline-block;margin-top:2px">Fecha de Aplicacion</span>
                         </div>
                         <div class="ui-g-6">
-                            <p-calendar [(ngModel)]="dateValue" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2020" dateFormat="dd/mm/yy" ></p-calendar>
+                            <p-calendar [(ngModel)]="dateValue" [disabled]="blocked" [monthNavigator]="true" [yearNavigator]="true" yearRange="1950:2020" dateFormat="dd/mm/yy" ></p-calendar>
                         </div>                        
                     </div>
                     <div class="ui-g-3">
@@ -87,6 +88,6 @@
                     </ng-template>
                 </p-pickList>
             </p-panel>
-        </div>                    
+        </div>
     </div>
 </div>
