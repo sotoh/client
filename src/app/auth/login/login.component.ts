@@ -68,15 +68,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.login(this.f.username.value, this.f.password.value)
     .pipe(first())
     .subscribe(data => {
-      console.log(data)
-      switch(data.type){
+      //console.log(data)
+      /*switch(data.type){
         case 'admin':
             this.router.navigate(['/admin']); break;
           case 'auditor': 
             this.router.navigate(['/auditor']); break;
           case 'enterprise': 
-            this.router.navigate(['/empresa']);break;
-      }
+            this.router.navigate(['/usuario']);break;
+      }*/
       this.router.navigate([this.returnUrl]);
     },
     error => {      

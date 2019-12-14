@@ -42,13 +42,13 @@ export class EnterpriseComponent implements OnInit, OnDestroy {
     });
     this.industry = [];
     this.industry.push({label:'Selecciona Giro', value:''});
-    this.industry.push({label:'Transporte', value:'transport'});
-    this.industry.push({label:'Turismo', value:'tourism'});
-    this.industry.push({label:'Telecomunicaciones', value:'telco'});
-    this.industry.push({label:'Industrial', value:'industry'});
-    this.industry.push({label:'Software', value:'software'});
-    this.industry.push({label:'Educacion', value:'education'});
-    this.industry.push({label:'Comercio', value:'commerce'});
+    this.industry.push({label:'Transporte', value:'Transporte'});
+    this.industry.push({label:'Turismo', value:'Turismo'});
+    this.industry.push({label:'Telecomunicaciones', value:'Telecomunicaciones'});
+    this.industry.push({label:'Industrial', value:'Industrial'});
+    this.industry.push({label:'Software', value:'Software'});
+    this.industry.push({label:'Educacion', value:'Educacion'});
+    this.industry.push({label:'Comercio', value:'Comercio'});
 
   }
 

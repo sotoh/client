@@ -11,12 +11,11 @@ import { AuditorModule } from './auditor/auditor.module';
 import { EnduserModule } from './enduser/enduser.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtinterceptorService } from './services/jwtinterceptor.service';
-import { StatusPipe } from './models/status.pipe';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    StatusPipe,
+    AppComponent    
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,7 @@ export class EnterpriseindexService {
   indexPipe(page:number) {
     return this.http.get(`${environment.apiUrl}/admin/enterprises/${page}`)
     .pipe(map(user => {
-     return <EnterpriseIndex>user
+     return <EnterpriseIndex> user;
     }));      
   }
 

@@ -24,7 +24,7 @@ export class TopbarComponent implements OnInit, OnDestroy {
     //switch(this.authService.currentUserValue.type)
     this.subUser = this.authService.currentUser.subscribe(value => {
       this.currentUser = value
-      console.log(value)
+      //console.log(value)
       if(value) {
         this.setNewItems(value);
       }else {

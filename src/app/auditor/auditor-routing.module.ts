@@ -5,6 +5,8 @@ import { ProfileauditorComponent } from './profileauditor/profileauditor.compone
 import { NotfoundComponent } from '../components/notfound/notfound.component';
 import { AuditsauditorComponent } from './auditsauditor/auditsauditor.component';
 import { AuditorguardService } from './services/auditorguard.service';
+import { HomequestionsComponent } from './homequestions/homequestions.component';
+import { QuestionsComponent } from './questions/questions.component';
 
 //{path:'**', component: NotfoundComponent}
 //, canActivate: [AuditorguardService]
@@ -13,7 +15,10 @@ const routes: Routes = [
    children: [
     {path: '',  loadChildren: () => import('../components/components.module').then(m => m.ComponentsModule)}, 
     {path: 'perfil', component: ProfileauditorComponent},
-    {path:'auditorias', component: AuditsauditorComponent }
+    {path: 'auditorias', component: AuditsauditorComponent}, 
+    {path: 'question', component: HomequestionsComponent, children: [
+      {path:':audit/:enterprise', component: QuestionsComponent}
+    ]}    
   ], canActivate: [AuditorguardService]} ,    
   ];
 

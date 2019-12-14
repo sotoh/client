@@ -27,7 +27,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
           this.text = `Administrador`
           break;
           case 'enterprise': 
-          this.text = `Usuario:`
+          this.text = `Empresa`
           break;
           case 'auditor': 
           this.text = `Auditor`

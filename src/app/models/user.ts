@@ -55,8 +55,28 @@ export interface User {
   }
 
   export interface Pivot {
-    assign: Date;
-    status?:string;
+    assign: string;
+    status:string;
+    enterprise_id?: number;
+    audit_id?:number;
+  }
+
+  
+  export interface EnterpriseAuditIndex {
+    total: string;
+    perPage: number;
+    page: number;
+    lastPage: number;
+    data: EnterpriseAudit[]
+  }
+
+  export interface EnterpriseAudit {
+    id:number;
+    name: string;
+    enterprise: string;
+    status:string;
+    assign: string;
+    enterpriseId:number;
   }
 
   export interface Question {
@@ -67,11 +87,7 @@ export interface User {
     //options:Option[];
     options:string;
   }
-/*
-  export interface Option {
-    option:string;
-    value:number;
-  }*/
+
   export interface AuditIndex {
     total: string;
     perPage: number;
@@ -79,8 +95,6 @@ export interface User {
     lastPage: number;
     data: Audit[];
   }
-
-
 
   export interface QuestionIndex {
     total: string;
@@ -94,12 +108,25 @@ export interface User {
     id:number;
     isCustom: boolean;
     name:string;
-    questions: Question[]
+    pivot: Pivot;
+    questions?: Question[]
   }
-
+  
   export interface External {
     id: number;
     company:string;
     memberdate:Date;
     auditor_id: number;
+  }
+
+  export interface Answer {
+  question:number;
+  option:number
+  value:number;
+  ofi?:string;
+  observations?:string;
+  }
+
+  export interface Result {
+
   }
