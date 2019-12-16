@@ -81,10 +81,8 @@ export interface User {
 
   export interface Question {
     id:number;
-   // audit_id: number;
     question:string;
     type: string;
-    //options:Option[];
     options:string;
   }
 
@@ -120,13 +118,23 @@ export interface User {
   }
 
   export interface Answer {
-  question:number;
-  option:number
-  value:number;
+  question:number;//Oninit
+  option?:string
+  text:string;
+  value?:number;
+  type?: string; //Oninit
   ofi?:string;
   observations?:string;
   }
 
   export interface Result {
+    value:number;
+    type?: string;
+    ofi?:string;
+    observations?:string;
+  }
 
+  export interface Share {
+    enterprise:number;
+    dateAudit: string;
   }

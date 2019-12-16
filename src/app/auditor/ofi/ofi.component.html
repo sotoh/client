@@ -1,0 +1,100 @@
+<p-messages [(value)]="msgs"></p-messages>
+<form [formGroup]="ofiForm" (ngSubmit)="onSubmit()">
+    <p-table [value]="answers" [loading]="loading" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3em"></th>
+                <th>Preguntas</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-question let-rowIndex="rowIndex">
+            <tr>
+                <td>
+                    {{rowIndex + 1}}
+                </td>
+                <td>
+                    <div class="ui-fluid">
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                {{question.text}}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr >
+                <td></td>
+                <td [ngSwitch]="question.type">
+                    <div *ngSwitchCase="'iso'">
+                        <div class="ui-fluid">
+                            <div class="ui-g">
+                                <div class="ui-g-12">
+                                    <b></b>
+                                    <p-radioButton value="selected" label="{{question.option | isorange}}" [disabled]="disabled" [ngModelOptions]="{standalone: true}" [(ngModel)]="selected"></p-radioButton> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'default'">
+                        <div class="ui-fluid">
+                            <div class="ui-g">
+                                <div class="ui-g-12">
+                                    <p-radioButton  value="selected" label="{{question.option | range}}" [disabled]="disabled" [ngModelOptions]="{standalone: true}" [(ngModel)]="selected"></p-radioButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'description'">
+                        <div  class="ui-fluid">
+                            <div class="ui-g">
+                                <div class="ui-g-10">
+                                    <textarea rows="5" cols="30" pInputTextarea value={{question.observations}} [disabled]="disabled" autoResize="autoResize"  ></textarea>
+                                </div>
+                                <div class="ui-g-2">
+                                    <b>Evaluacion</b>: <br> {{question.value}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'true/false'">
+                        <div  class="ui-fluid">
+                            <div class="ui-g">
+                                <div class="ui-g-12" *ngIf="question.option == 't'">
+                                    <p-triStateCheckbox label="Cumple" [ngModelOptions]="{standalone: true}" [disabled]="disabled" [(ngModel)]="checked" ></p-triStateCheckbox>
+                                </div>
+                                <div class="ui-g-12" *ngIf="question.option == 'f'">
+                                    <p-triStateCheckbox label="No Cumple" [ngModelOptions]="{standalone: true}" [disabled]="disabled" [(ngModel)]="notChecked" ></p-triStateCheckbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr [formGroup]="singleOfi(rowIndex)">
+                <td></td>
+                <td>
+                    <div  class="ui-fluid">
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                <b>Oportunidad de Mejora</b>
+                                <br>
+                                <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" formControlName="ofi" ></textarea>
+                                <p-message severity="error" *ngIf="!singleOfi(rowIndex).controls.ofi.valid && submitted"></p-message>
+                            </div>
+                        </div>
+                    </div>
+                </td>                
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="footer" let-columns>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="">
+                        <button pButton label="Evaluar" class="ui-button-raised"></button>
+                    </div>
+                </td>                
+            </tr>
+        </ng-template>
+    </p-table>
+</form>

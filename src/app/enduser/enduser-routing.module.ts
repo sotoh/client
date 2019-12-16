@@ -12,8 +12,8 @@ const routes: Routes = [
   {path:'usuario',component: HomeuserComponent, 
   children: [
   {path: '',  loadChildren: () => import('../components/components.module').then(m => m.ComponentsModule)}, 
-  {path:'perfil',component: ProfileuserComponent },
-  {path:'reportes',component: ReportuserComponent }
+  {path:'resultados',component: ProfileuserComponent },
+  {path:'reportes/:id',component: ReportuserComponent }
 ],canActivate: [EnduserguardService]}
 ];
 

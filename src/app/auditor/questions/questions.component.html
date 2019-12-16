@@ -1,56 +1,106 @@
-<p-table [value]="questions" [loading]="loading">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Preguntas</th>
-            <!--<th style="width: 3em"></th>-->
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-question>
-        <tr>
-            <td style="width: auto" >{{question.question}}</td>           
-        </tr>
-        <tr>
-            <td [ngSwitch]="question.options">
-                <div *ngSwitchCase="'isos'"> <!--cambiar a 'iso' -->
-                    <div  class="ui-fluid">
-                        <div class="ui-g">
-                            <div class="ui-g-3">
-                                <!--<p-radioButton name="{{question.id}}" value="compliant" label="Obediente" inputId={{question.id}}></p-radioButton>-->
-                                <p-radioButton name={{question.id}} value="100" (onFocus)="onFocus($event,1)" label="Obediente" inputId={{question.id}}></p-radioButton>
-                            </div>
-                            <div class="ui-g-3">
-                                <p-radioButton name={{question.id}}  value="75" (onFocus)="onFocus($event,2)" label="Oportunidad de Mejora" inputId={{question.id}}></p-radioButton>
-                            </div>
-                            <div class="ui-g-3">
-                                <p-radioButton name={{question.id}}  value="50"  (onFocus)="onFocus($event,3)" label="Menor No-Conformidad" inputId={{question.id}}></p-radioButton>
-                            </div>
-                            <div class="ui-g-3">
-                                <p-radioButton name={{question.id}}  value="25"(onFocus)="onFocus($event,4)"  label="Mayor No-Conformidad" inputId={{question.id}}></p-radioButton>
-                            </div>
-                        </div>                                                                                                
-                    </div>
-                </div>
-                <div *ngSwitchCase="'isos'"><!-- Cambiar a description--> 
-                    <div  class="ui-fluid">
+<form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
+    <p-table [value]="questions" [loading]="loading" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3em"></th>
+                <th>Preguntas</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-question let-rowIndex="rowIndex">
+            <tr>
+                <td>
+                    {{rowIndex + 1}}
+                </td>
+                <td>
+                    <div class="ui-fluid">
                         <div class="ui-g">
                             <div class="ui-g-12">
-                                <!--<p-radioButton name={{question.id}} value="100" (onFocus)="onFocus($event,1)" label="Obediente" inputId={{question.id}}></p-radioButton>-->
-                                <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize"></textarea>
-                            </div>                            
-                        </div>                                                                                                
-                    </div>
-                </div>
-                <div *ngSwitchCase="'iso'"><!-- Cambiar a check-->            
-                    <div class="ui-fluid" >
-                        <div class="ui-g">
-                            <div class="ui-g-12" >
-                                <!--<p-checkbox name={{question.id}} value="true" (onChange)="onChange($event,question.id)" label="Si Cumple" inputId={{question.id}}></p-checkbox>-->
-                                <p-inputSwitch name={{question.id}} (onChange)="onChange($event,question.id)" inputId={{question.id}}></p-inputSwitch>
+                                {{question.question}}
                             </div>
                         </div>
                     </div>
-                </div>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
+                </td>
+            </tr>
+            <tr [formGroup]="singleQuestion(rowIndex)">
+                <td></td>
+                <td [ngSwitch]="question.options">
+                    <div *ngSwitchCase="'iso'"> <!--cambiar a 'iso' -->
+                        <div class="ui-fluid">
+                            <div class="ui-g">
+                                <div class="ui-g-3">
+                                    <p-radioButton name={{question.id}}  value="4" label="Mayor No-Conformidad" formControlName="option" ></p-radioButton>
+                                </div>
+                                <div class="ui-g-3">
+                                    <p-radioButton name={{question.id}}  value="3" label="Menor No-Conformidad" formControlName="option" ></p-radioButton>
+                                </div>
+                                <div class="ui-g-3">
+                                    <p-radioButton name={{question.id}}  value="2" label="Oportunidad de Mejora" formControlName="option" ></p-radioButton>
+                                </div>                                
+                                <div class="ui-g-3">
+                                    <p-radioButton name={{question.id}} value="1" label="Obediente" formControlName="option" ></p-radioButton>
+                                </div>
+                                <p-message severity="error" *ngIf="!singleQuestion(rowIndex).controls.option.valid && submitted"></p-message>
+                            </div>                                                                                                
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'default'"> <!--cambiar a 'iso' -->
+                        <div class="ui-fluid">
+                            <div class="ui-g">
+                                <div class="ui-g-2">
+                                    <p-radioButton name={{question.id}} value="5" label="Nunca" formControlName="optionTwo" ></p-radioButton>
+                                </div>
+                                <div class="ui-g-2">
+                                    <p-radioButton name={{question.id}}  value="4" label="Rara vez" formControlName="optionTwo" ></p-radioButton>
+                                </div>
+                                <div class="ui-g-3">
+                                    <p-radioButton name={{question.id}}  value="3" label="Algunas veces" formControlName="optionTwo" ></p-radioButton>
+                                </div>
+                                <div class="ui-g-3">
+                                    <p-radioButton name={{question.id}}  value="2" label="Frecuentemente" formControlName="optionTwo"></p-radioButton>
+                                </div>
+                                <div class="ui-g-2">
+                                    <p-radioButton name={{question.id}}  value="1" label="Siempre" formControlName="optionTwo"></p-radioButton>
+                                </div>
+                                <p-message severity="error" *ngIf="!singleQuestion(rowIndex).controls.optionTwo.valid && submitted"></p-message>
+                            </div>                                                                                                
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'description'"><!-- Cambiar a description--> 
+                        <div  class="ui-fluid">
+                            <div class="ui-g">
+                                <div class="ui-g-10">
+                                    <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" formControlName="description" ></textarea>
+                                    <p-message severity="error" *ngIf="!singleQuestion(rowIndex).controls.description.valid && submitted"></p-message>
+                                </div>
+                                <div class="ui-g-2">
+                                    <b>Evaluacion</b><p-spinner size="30" formControlName="value" [min]="0" [max]="100"></p-spinner>
+                                    <p-message severity="error" *ngIf="!singleQuestion(rowIndex).controls.value.valid && submitted"></p-message>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'true/false'"><!-- Cambiar a check--> 
+                        <div  class="ui-fluid">
+                            <div class="ui-g">
+                                <div class="ui-g-12">
+                                    <p-triStateCheckbox formControlName="check" [(ngModel)]="value"></p-triStateCheckbox>
+                                    <p-message severity="error" *ngIf="!singleQuestion(rowIndex).controls.check.valid && submitted"></p-message>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="footer" let-columns>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="">
+                        <button pButton label="Siguiente" class="ui-button-raised"></button>
+                    </div>
+                </td>                
+            </tr>
+        </ng-template>
+    </p-table>
+</form>

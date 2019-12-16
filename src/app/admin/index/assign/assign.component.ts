@@ -169,6 +169,7 @@ export class AssignComponent implements OnInit
             this.blockedPanel = false;
             this.response = resp;
             this.showSuccess();
+            this.targetAudits = [];
             this.blocked = true
           },error => {
             this.blockedPanel = false;
@@ -179,11 +180,13 @@ export class AssignComponent implements OnInit
           //console.log()
         } else {
           //If undefined
+          this.blockedPanel = false;
           this.error = 'Seleccione la Fecha';
           this.showError();
           //console.log(this.dateValue)
         }
       } else {
+        this.blockedPanel = false;
         this.error = 'Debe seleccionar almenos una auditoría';
         this.showError();
       }

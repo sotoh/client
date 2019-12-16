@@ -47,8 +47,8 @@ export class TopbarComponent implements OnInit, OnDestroy {
         {label: 'Usuarios', icon: 'pi pi-users',url:'admin/usuarios'},
         {label: 'Auditorias', icon: 'pi pi-list', 
         items: [
-          {label: 'Crear', icon: 'pi pi-fw pi-plus', url:'admin/crear'},
-          {label: 'Ver', icon: 'pi pi-fw pi-table', url:'admin/auditorias'}
+          {label: 'Crear', icon: 'pi pi-fw pi-plus', url:'admin/auditorias/crear'},
+          {label: 'Ver', icon: 'pi pi-fw pi-table', url:'admin/auditorias/auditorias'}
       ]},{separator:true},
         {label: 'Auditores', icon: 'pi pi-id-card',url:'admin/auditor'},
         {label: 'Empresas', icon: 'pi pi-th-large',url:'admin/empresa'}
@@ -56,8 +56,7 @@ export class TopbarComponent implements OnInit, OnDestroy {
       break;
       case 'enterprise': 
       this.items = [        
-        {label: 'Estadisticas', icon: 'pi pi-chart-line',url:'usuario/perfil'},        
-        {label: 'Reportes', icon: 'pi pi-briefcase',url:'usuario/reportes'}
+        {label: 'Estadisticas', icon: 'pi pi-chart-line',url:'usuario/resultados'}
     ]; break;
       case 'auditor':
           this.items = [            

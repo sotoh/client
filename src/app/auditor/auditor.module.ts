@@ -21,11 +21,19 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputSwitchModule } from 'primeng/inputswitch';
-
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
+import { OfiComponent } from './ofi/ofi.component';
+import { SpinnerModule } from 'primeng/spinner';
+import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
+import { RangePipe } from './range.pipe';
+import { IsorangePipe } from './isorange.pipe';
+import { FinishComponent } from './finish/finish.component';
 
 
 @NgModule({
-  declarations: [ HomeauditorComponent, ProfileauditorComponent, AuditsauditorComponent, StatusPipe, HomequestionsComponent, QuestionsComponent],
+  declarations: [ HomeauditorComponent, ProfileauditorComponent, AuditsauditorComponent, StatusPipe, HomequestionsComponent, QuestionsComponent, OfiComponent, RangePipe, IsorangePipe, FinishComponent],
   imports: [
     CommonModule,
     AuditorRoutingModule,
@@ -43,7 +51,12 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     CheckboxModule,
     RadioButtonModule,
     InputTextareaModule,
-    InputSwitchModule
+    InputSwitchModule,
+    KeyFilterModule,
+    MessageModule,
+    MessagesModule,
+    SpinnerModule,
+    TriStateCheckboxModule
   ]
 })
 export class AuditorModule { }

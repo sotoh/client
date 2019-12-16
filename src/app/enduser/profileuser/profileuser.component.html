@@ -1,1 +1,26 @@
-<p>profileuser works!</p>
+<p-dataView #dv [value]="audits" [paginator]="true" [rows]="auditsRows" 
+    [sortField]="sortField" [sortOrder]="sortOrder" [loading]="loading"
+    [lazy]="true" (onLazyLoad)="loadData($event)" [totalRecords]="totalRecords">
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-g">                
+                <div class="ui-g-6 ui-md-12 filter-container" style="text-align: center;"> 
+                    Índice de Auditorías                  
+                </div>
+            </div>
+        </div>
+    </p-header>
+    <ng-template let-audit pTemplate="listItem">
+        <div class="ui-g-12">
+            <div class="car-details">
+                <div>                    
+                    <div class="ui-g">
+                        <div class="ui-g-12">Nombre <br><b>{{audit.name}}</b></div>
+                        <div class="ui-g-12">Fecha Asignada <br><b>{{audit.assign | date:'dd MMMM y' }}</b></div>
+                    </div>
+                </div>
+            <button pButton type="button" label="Revisar" (click)="moveon(audit.id, audit.enterpriseId,audit.assign)"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>

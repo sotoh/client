@@ -6,6 +6,7 @@ import { SelectItem, LazyLoadEvent } from 'primeng/api';
 import { AuthenticationService } from 'src/app/auth/services/authentication.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { DateService } from '../services/date.service';
 
 @Component({
   selector: 'app-auditsauditor',
@@ -18,7 +19,8 @@ export class AuditsauditorComponent implements OnInit {
     private titleService: RoutenameService,
     private auditService: AuditorsoperationsService,
     private authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private dateService: DateService
     ) { }
     audits: EnterpriseAudit[];
     auditsRows:number;
@@ -26,6 +28,7 @@ export class AuditsauditorComponent implements OnInit {
     totalRecords: number;
     
   ngOnInit() {
+    this.loading = true;
     this.titleService.setTitle('Auditorias','auditorias');        
   this.auditService.audits(this.authService.currentUserValue.id,1)
   .pipe(first())
@@ -35,13 +38,14 @@ export class AuditsauditorComponent implements OnInit {
     this.auditsRows = data.perPage;
     this.totalRecords = parseInt(data.total);
   },error => {
-    
+    this.loading= false;
   });
   } 
 
-  navigate(auditId:number, enterpriseId:number){
+  navigate(auditId:number, enterpriseId:number, dateassign:string){
     //[routerLink]="['/question', audit.id, audit.enterpriseId]"
-    this.router.navigate(['auditor/question',auditId,enterpriseId]);
+    this.dateService.send(dateassign);
+    this.router.navigate(['auditor/preguntas',enterpriseId,auditId]);
   }
 
   loadData(event: LazyLoadEvent) {
@@ -54,7 +58,7 @@ export class AuditsauditorComponent implements OnInit {
       this.audits = resp.data;      
       this.auditsRows = resp.perPage;
     },error => {
-      
+      this.loading= false;      
     });
   }
 }

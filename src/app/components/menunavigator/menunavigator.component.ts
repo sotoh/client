@@ -41,7 +41,7 @@ export class MenunavigatorComponent implements OnInit,OnDestroy {
     }
   });
   this.home = {icon: 'pi pi-home', url:'/'};
-  this.subTitle = this.subTitle = this.titleService.currentTitle.subscribe(
+  this.subTitle = this.titleService.currentTitle.subscribe(
     data => {
       this.items = data;
     });

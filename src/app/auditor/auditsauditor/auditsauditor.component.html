@@ -1,5 +1,5 @@
 <p-dataView #dv [value]="audits" [paginator]="true" [rows]="auditsRows" 
-    [sortField]="sortField" [sortOrder]="sortOrder"
+    [sortField]="sortField" [sortOrder]="sortOrder" [loading]="loading"
     [lazy]="true" (onLazyLoad)="loadData($event)" [totalRecords]="totalRecords">
     <p-header>
         <div class="ui-helper-clearfix">
@@ -19,9 +19,10 @@
                         <div class="ui-g-12">Nombre <br><b>{{audit.name}}</b></div>
                         <div class="ui-g-12">Fecha Asignada <br><b>{{audit.assign | date:'dd MMMM y' }}</b></div>
                         <div class="ui-g-12">Estado <br><b>{{audit.status | status}}</b></div>
+                        <div class="ui-g-12">Empresa <br><b>{{audit.enterprise}}</b></div>
                     </div>
                 </div>
-                <button pButton type="button" label="Constestar" icon="pi pi-reply" (click)="navigate(audit.id, audit.enterpriseId)"  ></button>
+                <button pButton type="button" label="Constestar" icon="pi pi-reply" (click)="navigate(audit.id, audit.enterpriseId,audit.assign)"  ></button>
             </div>
         </div>
     </ng-template>
